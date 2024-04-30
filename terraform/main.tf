@@ -126,7 +126,6 @@ module "db" {
 module "key-pair" {
   source  = "terraform-aws-modules/key-pair/aws"
   key_name = "spider-type-server-ssh-key"
-  create_private_key = true
 }
 
 module "ec2-instance" {
@@ -143,6 +142,11 @@ module "ec2-instance" {
     owner = "alexander.kruger@bbd.co.za"
     created-using = "terraform"
   }
+}
+
+
+output "private_key_pem" {
+  value = nonsensitive(module.key-pair.private_key_pem)
 }
 
 module "ecr" {
