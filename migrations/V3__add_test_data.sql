@@ -9,9 +9,9 @@ INSERT INTO "Spiders" ("Name", "Description", "ImageLink") VALUES
 ('Orb-Weaver', 'These spiders are known for their beautiful, symmetrical webs. The Golden Orb-Weaver, also sometimes called the Banana Spider, is a common member of this family.', 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRH1Jj4SXn2UFiv3pqBfaljf7UTTcbdbmpyG8fnRUZ792Ipw80rIr-xtGvMOPd_');
 
 INSERT INTO "Options" ("QuestionId", "SpiderId", "Option") VALUES
-(1, 1, 'Black Widow'),
-(1, 2, 'Wolf Spider'),
-(1, 3, 'Jumping Spider'),
-(1, 4, 'Tarantula'),
-(1, 5, 'Orb-Weaver');
+(0, 0, 'Black Widow'),
+(0, 1, 'Wolf Spider'),
+(0, 2, 'Jumping Spider'),
+(0, 3, 'Tarantula'),
+(0, 4, 'Orb-Weaver');
 
