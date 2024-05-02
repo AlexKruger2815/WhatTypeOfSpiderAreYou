@@ -123,6 +123,11 @@ module "db" {
   }
 }
 
+module "key-pair" {
+  source  = "terraform-aws-modules/key-pair/aws"
+  key_name = "spydir-server-ssh-key"
+}
+
 module "ec2-instance" {
   source                       = "terraform-aws-modules/ec2-instance/aws"
   name                         = "spider-type-server-instance"
