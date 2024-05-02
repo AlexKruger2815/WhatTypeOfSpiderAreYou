@@ -22,4 +22,4 @@ jobs:
       - name: Install Flyway 
         run: sudo snap install flyway
       - name: Run flyway
-        run: flyway migrate -password=${{ secrets.DB_PASSWORD }}
+        run: flyway migrate -password="${{ secrets.DB_PASSWORD }}"
