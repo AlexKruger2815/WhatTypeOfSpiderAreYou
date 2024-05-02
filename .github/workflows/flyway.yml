@@ -3,10 +3,8 @@ name: Database Migration Tests with Flyway
 on:
   push:
     branches:
-        - main
-        - dev
-    paths:
-      - 'migrations/**'
+      - main
+      - dev
 
   workflow_dispatch:
 
