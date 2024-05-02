@@ -125,8 +125,7 @@ module "db" {
 
 module "key-pair" {
   source  = "terraform-aws-modules/key-pair/aws"
-  key_name = "spider-type-server-ssh-key"
-  create_private_key = true
+  key_name = "spydir-server-ssh-key"
 }
 
 module "ec2-instance" {
