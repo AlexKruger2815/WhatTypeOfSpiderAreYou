@@ -4,5 +4,5 @@ GET http://localhost:3000
 ###
 GET http://localhost:3000/api/questions
 ###
-GET http://localhost:3000/api/questions
+GET http://localhost:3000/api/spiders
 ###
