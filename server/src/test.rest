@@ -1,5 +1,8 @@
+#get the REST Client vs code extension to test these endpoints
 ###
 GET http://localhost:3000
+###
+GET http://localhost:3000/api/questions
 ###
 GET http://localhost:3000/api/questions
 ###
