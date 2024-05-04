@@ -4,13 +4,10 @@ FROM node:18-alpine
 # Working directory inside the container
 WORKDIR /WebLevelup/src
 
-# Copy package.json and package-lock.json (if exists)
-COPY package*.json ./
-
-# Install dependencies
+# Install dependencies based on package.json and package-lock.json (if exists)
 RUN npm install
 
-# Copy the rest of the project files
+# Copy all project files, including package*.json
 COPY . .
 
 # Expose port where the server listens (modify if needed)
