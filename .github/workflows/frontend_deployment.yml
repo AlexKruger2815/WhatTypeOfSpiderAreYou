@@ -69,6 +69,7 @@ jobs:
         key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
         envs: PRIVATE_SSH_KEY, REGISTRY, REPOSITORY, IMAGE_TAG, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_REGION
         script: |-
+           aws ecr batch-delete-image --repository-name ${{ secrets.ECR_REPOSITORY_NAME }} --region ${{ secrets.AWS_REGION }} --image-ids imageTag=${{ github.sha }}
            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_URI }}
            sudo docker stop server-api || true
            sudo docker rm server-api || true
