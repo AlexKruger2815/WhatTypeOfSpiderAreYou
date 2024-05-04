@@ -36,3 +36,5 @@ terraform.rc
 .terraform.lock.hcl
 
 package.json
+package-lock.json
+node_modules/
