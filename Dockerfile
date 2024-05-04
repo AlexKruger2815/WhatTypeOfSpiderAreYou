@@ -1,13 +1,17 @@
 # Base image for Node.js application
-FROM node:18-alpine
+FROM node:22-alpine
 
 # Working directory inside the container
 WORKDIR /WebLevelup/src
 
-# Install dependencies based on package.json and package-lock.json (if exists)
+# Copy package.json and package-lock.json (if exists)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm init -y
 RUN npm install
 
-# Copy all project files, including package*.json
+# Copy the rest of the project files
 COPY . .
 
 # Expose port where the server listens (modify if needed)
