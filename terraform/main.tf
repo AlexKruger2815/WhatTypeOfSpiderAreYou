@@ -123,15 +123,10 @@ module "db" {
   }
 }
 
-module "key-pair" {
-  source  = "terraform-aws-modules/key-pair/aws"
-  key_name = "spydir-server-ssh-key"
-}
-
 module "ec2-instance" {
   source                       = "terraform-aws-modules/ec2-instance/aws"
   name                         = "spider-type-server-instance"
-  key_name                     = module.key-pair.key_pair_name
+  key_name                     = "spyder-type-server-ssh-key"
   instance_type                = "t2.micro"
   ami_ssm_parameter            = "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
   vpc_security_group_ids       = [module.vpc_sg.security_group_id]
@@ -148,6 +143,7 @@ module "ecr" {
  source = "terraform-aws-modules/ecr/aws"
 
  repository_name = "spider-type-ecr-repo"
+ repository_image_tag_mutability = "MUTABLE"
 
  repository_lifecycle_policy = jsonencode({
    rules = [
