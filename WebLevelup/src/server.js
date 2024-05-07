@@ -34,20 +34,12 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "a013dc3b18da92da9dbe",
         clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: "http://localhost:3000/auth/github/callback"
+        callbackURL: "http://localhost:3005/auth/github/callback"
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
     }
 ));
-
-const isAuth = (req, res, next) => {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-};
 
 // Serve home.html as the initial page
 app.get('/', (req, res) => {
