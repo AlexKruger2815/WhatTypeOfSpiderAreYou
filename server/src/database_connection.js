@@ -6,6 +6,9 @@ const pool = new Pool({
     database: "SpiderTypeDB",
     password: "GAqr2PEH-6Yx%4WHRgM{n5}}(9m|",
     port: 5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 module.exports = pool;
