@@ -1,5 +1,6 @@
 const startBtn = document.querySelector('.take-quiz-btn');
 const popupInfo = document.querySelector('.popup-info');
+const popupLogin = document.querySelector('.popup-login');
 const exitBtn = document.querySelector('.exit-btn');
 const main = document.querySelector('.main');
 const continueBtn = document.querySelector('.continue-btn');
@@ -12,6 +13,8 @@ const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
 
 let spiderIds = [];
+
+window.onload = authorizeUser;
 
 startBtn.onclick = () => {
     popupInfo.classList.add('active');
@@ -148,4 +151,9 @@ function showResultBox() {
         });
 
     resultBox.classList.add('active');
+}
+
+function authorizeUser() {
+    popupLogin.classList.add('active');
+    main.classList.add('active');
 }

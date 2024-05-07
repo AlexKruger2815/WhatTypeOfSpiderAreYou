@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body onload="closePopup()">
   <main class="main">
     <header class="header">
       <a href="#" class="logo">Quiz.</a>
@@ -47,6 +47,11 @@
       </section>
     </div>
   </main>
+
+  <div class="popup-info">
+    <h2>Login</h2>
+    <a href="/auth/login" class="info-btn continue-btn">Authorize</a>
+  </div>
 
   <div class="popup-info">
     <h2>Quiz Instructions</h2>
