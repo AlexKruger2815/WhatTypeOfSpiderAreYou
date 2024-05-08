@@ -1,18 +1,31 @@
 version: '3'
 services:
   frontend:
-
     image: node:22-alpine
     working_dir: /opt/app/src # WebLevelup/src
     volumes:
       - ./WebLevelup:/opt/app
     command: ["sh", "-c", "npm install && node server.js"]
     ports:
-      - 3000:3005
+      - ${FRONTEND_SERVER_PORT}:${FRONTEND_SERVER_PORT}
     env_file:
-      - .env
+      - ./.env
     environment:
-      - SERVER_NAME=${SERVER_NAME}
+      - BACKEND_SERVER_HOST=${BACKEND_SERVER_HOST}
+      - BACKEND_SERVER_PORT=${BACKEND_SERVER_PORT}
+      - FRONTEND_SERVER_PORT=${FRONTEND_SERVER_PORT}
+  backend:
+    image: node:22-alpine
+    working_dir: /opt/app/src # server/src
+    volumes:
+      - ./server:/opt/app
+    command: ["sh", "-c", "npm install && node server.js"]
+    ports:
+      - ${BACKEND_SERVER_PORT}:${BACKEND_SERVER_PORT}
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_NAME=${DATABASE_NAME}
-      - USERNAME=${USERNAME}
-      - PASSWORD=${PASSWORD}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
