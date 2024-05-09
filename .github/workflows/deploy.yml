@@ -66,7 +66,7 @@ jobs:
           $DIR=${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
           if [[ -d $DIR ]]; then
             cd $DIR
-            docker compose down ${{ inputs.DOCKER_SERVICE_NAME }}
+            docker compose down -v ${{ inputs.DOCKER_SERVICE_NAME }}
             sudo rm -rf ${{ inputs.TARGET_DIR }}
           fi
 
