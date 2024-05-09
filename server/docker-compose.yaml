@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    image: node:22-alpine
+    working_dir: /opt/app/src
+    volumes:
+      - ./:/opt/app
+    command: ["sh", "-c", "npm install && node server.js"]
+    ports:
+      - ${BACKEND_SERVER_PORT}:${BACKEND_SERVER_PORT}
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}

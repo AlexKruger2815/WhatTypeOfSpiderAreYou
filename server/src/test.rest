@@ -1,0 +1,12 @@
+#Get the REST Client extension by Huachao Mao if you would like to test these endpoints in vscode
+
+GET http://localhost:3000/api/questions
+###
+GET http://localhost:3000/api/spiders
+###
+GET http://localhost:3000/api/options
+###
+GET http://localhost:3000/api/spiders/1
+###
+GET http://localhost:3000/api/form
+###

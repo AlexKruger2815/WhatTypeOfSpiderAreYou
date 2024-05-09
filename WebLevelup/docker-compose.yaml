@@ -1,0 +1,16 @@
+version: '3'
+services:
+  frontend:
+    image: node:22-alpine
+    working_dir: /opt/app/src
+    volumes:
+      - ./:/opt/app
+    command: ["sh", "-c", "npm install && node server.js"]
+    ports:
+      - ${FRONTEND_SERVER_PORT}:${FRONTEND_SERVER_PORT}
+    env_file:
+      - ./.env
+    environment:
+      - BACKEND_SERVER_HOST=${BACKEND_SERVER_HOST}
+      - BACKEND_SERVER_PORT=${BACKEND_SERVER_PORT}
+      - FRONTEND_SERVER_PORT=${FRONTEND_SERVER_PORT}
