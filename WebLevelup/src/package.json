@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "src",
   "version": "1.0.0",
   "main": "server.js",
@@ -11,8 +10,6 @@
   "author": "",
   "license": "ISC",
   "description": "",
-=======
->>>>>>> bec8546ba84c8f860859e6b3f2981642029874ed
   "dependencies": {
     "express": "^4.19.2",
     "express-session": "^1.18.0",

@@ -12,6 +12,12 @@ on:
       DOCKER_SERVICE_NAME:
         required: true
         type: string
+      AWS_REGION:
+        required: true
+        type: string
+      AWS_ROLE:
+        required: true
+        type: string
 
 permissions:
   id-token: write
@@ -30,8 +36,8 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       id: creds
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        role-to-assume: ${{ inputs.AWS_ROLE }}
+        aws-region: ${{ inputs.AWS_REGION }}
         output-credentials: true
         role-session-name: Github-OIDC-TERRAFORM
         audience: sts.amazonaws.com

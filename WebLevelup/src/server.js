@@ -4,7 +4,6 @@ const passport = require('passport');
 const session = require('express-session');
 
 const app = express();
-const ingressPort = process.env.FRONTEND_SERVER_PORT
 
 app.use(express.static('styles'));
 app.use(express.static('assets'));
@@ -35,7 +34,7 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "a013dc3b18da92da9dbe",
         clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: `http://localhost:${ingressPort}/auth/github/callback`
+        callbackURL: `http://localhost:3005/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
@@ -52,10 +51,12 @@ app.get('/auth/github', passport.authenticate('github'));
 
 // Callback after GitHub authentication
 app.get('/auth/github/callback',
-    passport.authenticate('github', {failureRedirect: '/login'}),
-    function (req, res) {
-        res.redirect('/');
-    });
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    req.session.user = req.user;
+    res.redirect('/');
+  }
+);
 
 // Serve home.html for the login route if the user is already authenticated
 app.get('/login', (req, res) => {
@@ -66,4 +67,22 @@ app.get('/login', (req, res) => {
     }
 });
 
-app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        console.error(err);
+      }
+      res.redirect('/'); // Redirect to homepage after logout
+    });
+  });
+
+app.get('/check-session', (req, res) => {
+    if (req.session && req.session.user) {
+      res.json({ isLoggedIn: true });
+    } else {
+      res.json({ isLoggedIn: false });
+    }
+  });
+
+  app.listen(3005, () => console.log(`Server is Running on port 3005`));
