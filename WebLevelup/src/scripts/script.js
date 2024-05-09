@@ -35,8 +35,6 @@ exitBtn.onclick = () => {
     main.classList.remove('active');
 }
 
-continueBtn.style.backgroundColor = "grey";
-continueBtn.style.color = "black";
 continueBtn.onclick = () => {
     if(questions.length !== 0 ){
         quizSection.classList.add('active');
