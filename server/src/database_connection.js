@@ -1,10 +1,14 @@
 const Pool = require ("pg").Pool;
+const user = process.env.DATABASE_USERNAME
+const password =  process.env.DATABASE_PASSWORD
+const host =  process.env.DATABASE_HOST
+const dbName =  process.env.DATABASE_NAME
 
 const pool = new Pool({
-    user: "postgres",
-    host: "spider-type-rds-instance.cxzxxuebgdfx.eu-west-1.rds.amazonaws.com",
-    database: "SpiderTypeDB",
-    password: "GAqr2PEH-6Yx%4WHRgM{n5}}(9m|",
+    user: user,
+    host: host,
+    database: dbName,
+    password: password,
     port: 5432,
     ssl: {
         rejectUnauthorized: false
