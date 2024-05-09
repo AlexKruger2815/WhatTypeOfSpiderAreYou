@@ -14,7 +14,7 @@ on:
         type: string
 env:
   ENV_S3_URI: ${{ secrets.FRONTEND_ENV }}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_REGION: "eu-west-1"
   AWS_ROLE: ${{ secrets.AWS_ROLE }}
   EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
   EC2_SSH_KEY_VALUE: ${{ secrets.EC2_SSH_KEY_VALUE }}
