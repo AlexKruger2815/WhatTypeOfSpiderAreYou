@@ -35,6 +35,8 @@ exitBtn.onclick = () => {
     main.classList.remove('active');
 }
 
+continueBtn.style.backgroundColor = "grey";
+continueBtn.style.color = "black";
 continueBtn.onclick = () => {
     if(questions.length !== 0 ){
         quizSection.classList.add('active');
@@ -193,10 +195,6 @@ function authorizeUser() {
         console.error(error);
       });
 }
-
-    popupLogin.classList.add('active');
-    main.classList.add('active');
-
 
 function getRandomSource(sources) {
     return sources[Math.floor(Math.random() * sources.length)];

@@ -1,4 +1,4 @@
-name: Deploy to Amazon EC2
+name: Deploy Frontend to Amazon EC2
 
 on:
   push:
@@ -18,3 +18,5 @@ jobs:
       SOURCE_DIR: WebLevelup
       TARGET_DIR: /home/ubuntu/Frontend
       DOCKER_SERVICE_NAME: frontend
+      AWS_REGION: eu-west-1
+      AWS_ROLE: arn:aws:iam::535492056399:role/terraform-20240502090117326400000001
