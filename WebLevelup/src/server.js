@@ -37,7 +37,7 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "a013dc3b18da92da9dbe",
         clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: `http://localhost:${ingressPort}/auth/github/callback`
+        callbackURL: `http://${{backendHost}}:${ingressPort}/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
