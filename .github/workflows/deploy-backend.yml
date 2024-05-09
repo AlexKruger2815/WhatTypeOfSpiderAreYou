@@ -14,9 +14,8 @@ jobs:
   deploy:
     name: Deploy Backend to EC2
     uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
+    secrets: inherit
     with:
       SOURCE_DIR: server
       TARGET_DIR: /home/ubuntu/Backend
       DOCKER_SERVICE_NAME: backend
-      AWS_REGION: eu-west-1
-      AWS_ROLE: arn:aws:iam::535492056399:role/terraform-20240502090117326400000001
