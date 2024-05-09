@@ -18,5 +18,5 @@ jobs:
       SOURCE_DIR: server
       TARGET_DIR: /home/ubuntu/Backend
       DOCKER_SERVICE_NAME: backend
-      AWS_REGION: ${{secrets.AWS_REGION}}
-      AWS_ROLE: ${{secrets.AWS_ROLE}}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_ROLE: ${{ secrets.AWS_ROLE }}
