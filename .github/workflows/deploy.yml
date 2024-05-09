@@ -1,0 +1,72 @@
+name: Deploy to Amazon EC2
+
+on:
+  workflow_call:
+    inputs:
+      SOURCE_DIR: 
+        required: true
+        type: string
+      TARGET_DIR:
+        required: true
+        type: string
+      DOCKER_SERVICE_NAME:
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials from AWS account
+      uses: aws-actions/configure-aws-credentials@v4
+      id: creds
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE }}
+        aws-region: ${{ secrets.AWS_REGION }}
+        output-credentials: true
+        role-session-name: Github-OIDC-TERRAFORM
+        audience: sts.amazonaws.com
+
+    - name: Set IP env variable
+      run: |
+        EC2_IP=$(aws ec2 describe-instances --query "Reservations[*].Instances[?KeyName=='${{ secrets.EC2_SSH_KEY_NAME }}'].PublicIpAddress" --output text)
+        echo "EC2_IP=$EC2_IP" >> $GITHUB_ENV
+
+    - name: Stop server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.EC2_IP }}
+        username: ubuntu
+        key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
+        script: |-
+            cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
+            docker compose down ${{ inputs.dockerServiceName }}
+
+    - name: Replace code on EC2
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ env.EC2_IP }}
+        username: ubuntu
+        key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
+        source: "${{ inputs.SOURCE_DIR }}/"
+        rm: true
+        target: ${{ inputs.TARGET_DIR }}/
+      
+    - name: Start server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.EC2_IP }}
+        username: ubuntu
+        key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
+        script: |-
+            cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
+            docker compose up -d --build  ${{ inputs.dockerServiceName }}

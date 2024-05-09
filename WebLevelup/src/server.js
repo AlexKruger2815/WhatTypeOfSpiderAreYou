@@ -4,6 +4,7 @@ const passport = require('passport');
 const session = require('express-session');
 
 const app = express();
+const ingressPort = process.env.FRONTEND_SERVER_PORT
 
 app.use(express.static('styles'));
 app.use(express.static('assets'));
@@ -34,7 +35,7 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "a013dc3b18da92da9dbe",
         clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: "http://localhost:3005/auth/github/callback"
+        callbackURL: `http://localhost:${ingressPort}/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
@@ -87,4 +88,4 @@ app.get('/check-session', (req, res) => {
     }
   });
 
-app.listen(3005, () => console.log('Server is Running on port 3005'));
+  app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
