@@ -116,12 +116,20 @@ function showResultBox() {
     quizBox.classList.remove('active');
     
     const numbers = spiderIds.map(Number);
+    console.log('spiderIds',spiderIds);
+    const modeSpider = numbers.reduce((acc, curr) => {
+        acc[curr] = (acc[curr] || 0) + 1;
+        if (acc[curr] > acc.modeCount) {
+            acc.mode = curr;
+            acc.modeCount = acc[curr];
+        }
+        return acc;
+    }, { mode: null, modeCount: -1 }).mode;
 
-    const spiderIdsSum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-    const averageSpider=Math.floor(spiderIdsSum/questions.length);
     spiderIds=[];
-    fetch(`http://localhost:3000/api/spiders/${averageSpider}`)
+    
+    console.log('mode',modeSpider);
+    fetch(`http://localhost:3000/api/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
