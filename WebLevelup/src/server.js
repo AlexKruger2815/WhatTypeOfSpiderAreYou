@@ -88,4 +88,4 @@ app.get('/check-session', (req, res) => {
     }
   });
 
-  app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
+  app.listen(ingressPort, backendHost, () => console.log(`Server is Running on port ${ingressPort}`));
