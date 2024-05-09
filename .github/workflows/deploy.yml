@@ -12,21 +12,12 @@ on:
       DOCKER_SERVICE_NAME:
         required: true
         type: string
-      AWS_REGION:
-        type: string
-        required: true
-      AWS_ROLE:
-        type: string
-        required: true
-      ENV_S3_URI:
-        type: string
-        required: true
-      EC2_SSH_KEY_NAME:
-        type: string
-        required: true
-      EC2_SSH_KEY_VALUE:
-        type: string
-        required: true
+env:
+  ENV_S3_URI: ${{ secrets.FRONTEND_ENV }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_ROLE: ${{ secrets.AWS_ROLE }}
+  EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
+  EC2_SSH_KEY_VALUE: ${{ secrets.EC2_SSH_KEY_VALUE }}
 
 permissions:
   id-token: write
@@ -46,7 +37,7 @@ jobs:
       id: creds
       with:
         role-to-assume: ${{ inputs.AWS_ROLE }}
-        aws-region: ${{ inputs.AWS_REGION }}
+        aws-region: ${{ env.AWS_REGION }}
         output-credentials: true
         role-session-name: Github-OIDC-TERRAFORM
         audience: sts.amazonaws.com
@@ -58,11 +49,11 @@ jobs:
     
     - name: retrieve env file
       run: |
-          aws s3 cp ${{inputs.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
+          aws s3 cp ${{env.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
 
     - name: Set IP env variable
       run: |
-        EC2_IP=$(aws ec2 describe-instances --query "Reservations[*].Instances[?KeyName=='${{ inputs.EC2_SSH_KEY_NAME }}'].PublicIpAddress" --output text)
+        EC2_IP=$(aws ec2 describe-instances --query "Reservations[*].Instances[?KeyName=='${{ env.EC2_SSH_KEY_NAME }}'].PublicIpAddress" --output text)
         echo "EC2_IP=$EC2_IP" >> $GITHUB_ENV
 
     - name: Stop server
@@ -70,7 +61,7 @@ jobs:
       with:
         host: ${{ env.EC2_IP }}
         username: ubuntu
-        key:  ${{ inputs.EC2_SSH_KEY_VALUE }}
+        key:  ${{ env.EC2_SSH_KEY_VALUE }}
         script: |-
             cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
             docker compose down ${{ inputs.DOCKER_SERVICE_NAME }}
@@ -80,7 +71,7 @@ jobs:
       with:
         host: ${{ env.EC2_IP }}
         username: ubuntu
-        key:  ${{ inputs.EC2_SSH_KEY_VALUE }}
+        key:  ${{ env.EC2_SSH_KEY_VALUE }}
         source: "${{ inputs.SOURCE_DIR }}/"
         rm: true
         target: ${{ inputs.TARGET_DIR }}/
@@ -90,7 +81,7 @@ jobs:
       with:
         host: ${{ env.EC2_IP }}
         username: ubuntu
-        key:  ${{ inputs.EC2_SSH_KEY_VALUE }}
+        key:  ${{ env.EC2_SSH_KEY_VALUE }}
         script: |-
             cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
             docker compose up -d --build  ${{ inputs.DOCKER_SERVICE_NAME }}

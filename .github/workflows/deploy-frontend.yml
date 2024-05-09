@@ -13,16 +13,9 @@ permissions:
 jobs:
   deploy:
     name: Deploy Frontend to EC2
-    runs-on: ubuntu-latest
-    steps:
-      - uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
-        with:
-          SOURCE_DIR: WebLevelup
-          TARGET_DIR: /home/ubuntu/Frontend
-          DOCKER_SERVICE_NAME: frontend
-          ENV_S3_URI: ${{ secrets.FRONTEND_ENV }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ROLE: ${{ secrets.AWS_ROLE }}
-          EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
-          EC2_SSH_KEY_VALUE: ${{ secrets.EC2_SSH_KEY_VALUE }}
-
+    uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      SOURCE_DIR: WebLevelup
+      TARGET_DIR: /home/ubuntu/Frontend
+      DOCKER_SERVICE_NAME: frontend

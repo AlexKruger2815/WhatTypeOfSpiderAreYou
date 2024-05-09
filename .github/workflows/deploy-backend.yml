@@ -1,4 +1,4 @@
-name: Deploy Backend to Amazon EC2
+name: Deploy to Amazon EC2
 
 on:
   push:
@@ -12,16 +12,10 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy Backend to EC2
-    runs-on: ubuntu-latest
-    steps:
-      - uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
-        with:
-          SOURCE_DIR: WebLevelup
-          TARGET_DIR: /home/ubuntu/Backend
-          DOCKER_SERVICE_NAME: backend
-          ENV_S3_URI: ${{ secrets.BACKEND_ENV }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ROLE: ${{ secrets.AWS_ROLE }}
-          EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
-          EC2_SSH_KEY_VALUE: ${{ secrets.EC2_SSH_KEY_VALUE }}
+    name: Deploy Frontend to EC2
+    uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      SOURCE_DIR: server
+      TARGET_DIR: /home/ubuntu/Backend
+      DOCKER_SERVICE_NAME: backend
