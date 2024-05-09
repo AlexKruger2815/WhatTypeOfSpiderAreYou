@@ -157,13 +157,11 @@ function authorizeUser() {
     fetch('/check-session')
     .then(response => response.json())
     .then(data => {
-      if (data.isLoggedIn) {
-        return;
-      }
-      popupLogin.classList.add('logged-in');
-      main.classList.add('active');
+        if (!data.isLoggedIn) {
+            popupLogin.classList.add('logged-in');
+            main.classList.add('active');
+        } 
     })
-    .catch(error => console.error(error));
     
 }
 
