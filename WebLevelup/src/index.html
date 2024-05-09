@@ -12,8 +12,19 @@
 <body onload="closePopup()">
   <main class="main">
     <header class="header">
-      <a href="#" class="logo">Quiz.</a>
+      <!-- <a href="#" class="logo">Quiz.</a> -->
+      <div class="wrapper">
+        <div class="marquee">
+          <p>
+            The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp;
+          </p>
+          <p>
+            The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp; The Quiz Header &emsp; &emsp;
+          </p>
+        </div>
+      </div>
     </header>
+    
 
     <div class="container">
       <section class="quiz-section">
@@ -48,9 +59,10 @@
     </div>
   </main>
 
-  <div class="popup-info">
+  <div class="popup-login">
     <h2>Login</h2>
-    <a href="/auth/login" class="info-btn continue-btn">Authorize</a>
+    <p>No. Go authorize yourself.</p>
+    <button onclick="authorizeClicked()" class="info-btn">Authorize</button>
   </div>
 
   <div class="popup-info">

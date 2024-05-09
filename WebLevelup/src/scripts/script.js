@@ -14,7 +14,7 @@ const optionList = document.querySelector('.option-list');
 
 let spiderIds = [];
 
-window.onload = authorizeUser;
+document.addEventListener("DOMContentLoaded", authorizeUser);
 
 startBtn.onclick = () => {
     popupInfo.classList.add('active');
@@ -154,6 +154,21 @@ function showResultBox() {
 }
 
 function authorizeUser() {
-    popupLogin.classList.add('active');
-    main.classList.add('active');
+    fetch('/check-session')
+    .then(response => response.json())
+    .then(data => {
+      if (data.isLoggedIn) {
+        return;
+      }
+      popupLogin.classList.add('logged-in');
+      main.classList.add('active');
+    })
+    .catch(error => console.error(error));
+    
+}
+
+function authorizeClicked() {
+    window.location.href = '/auth/github';
+    popupLogin.classList.remove('logged-in');
+    main.classList.remove('active');
 }

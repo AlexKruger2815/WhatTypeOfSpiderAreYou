@@ -51,10 +51,12 @@ app.get('/auth/github', passport.authenticate('github'));
 
 // Callback after GitHub authentication
 app.get('/auth/github/callback',
-    passport.authenticate('github', {failureRedirect: '/login'}),
-    function (req, res) {
-        res.redirect('/');
-    });
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    req.session.user = req.user;
+    res.redirect('/');
+  }
+);
 
 // Serve home.html for the login route if the user is already authenticated
 app.get('/login', (req, res) => {
@@ -64,5 +66,25 @@ app.get('/login', (req, res) => {
         res.sendFile(__dirname + '/index.html');
     }
 });
+
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        console.error(err);
+        // Handle error appropriately
+      }
+      res.redirect('/'); // Redirect to homepage after logout
+    });
+  });
+
+app.get('/check-session', (req, res) => {
+    console.log(req);
+    if (req.session && req.session.user) {
+      res.json({ isLoggedIn: true });
+    } else {
+      res.json({ isLoggedIn: false });
+    }
+  });
 
 app.listen(3005, () => console.log('Server is Running on port 3005'));
