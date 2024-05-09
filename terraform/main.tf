@@ -192,3 +192,9 @@ module "iam_github_oidc_role" {
     created-using = "terraform"
   }
 }
+
+module "s3-bucket" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "4.1.2"
+  bucket = "spider-type-env-bucket"
+}
