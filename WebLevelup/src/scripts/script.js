@@ -13,6 +13,13 @@ const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
 const authorizeButton = document.getElementById("loginButton");
 
+const imageSources = [
+    "walking-spider.gif",
+    "weaving-spider.gif",
+    "dancing-spider.gif",
+    "dropping-spider.gif",
+    "knitting-spider.gif",
+];
 let spiderIds = [];
 
 document.addEventListener("DOMContentLoaded", authorizeUser);
@@ -28,13 +35,17 @@ exitBtn.onclick = () => {
     main.classList.remove('active');
 }
 
+continueBtn.style.backgroundColor = "grey";
+continueBtn.style.color = "black";
 continueBtn.onclick = () => {
-    quizSection.classList.add('active');
-    popupInfo.classList.remove('active');
-    main.classList.remove('active');
-    quizBox.classList.add('active');
-    showQuestions(0);
-    questionNumberCounter(1);
+    if(questions.length !== 0 ){
+        quizSection.classList.add('active');
+        popupInfo.classList.remove('active');
+        main.classList.remove('active');
+        quizBox.classList.add('active'); 
+        showQuestions(0);
+        questionNumberCounter(1);
+    }
 }
 
 let questionCount = 0;
@@ -97,12 +108,11 @@ function showQuestions(index) {
     for (let i = 0; i < option.length; i++) {
         option[i].setAttribute('onclick', 'optionSelected(this)');
     }
+    resetResultBox();
 }
 
 function optionSelected(answer) {
-    // Logic for spider type here
-    // (maybe assign possible score related to spider)
-    
+
     const allOptions = document.querySelectorAll('.option');
     allOptions.forEach(option => {
         option.classList.remove('selected');
@@ -184,4 +194,23 @@ function authorizeUser() {
         main.classList.add('active');
         console.error(error);
       });
+}
+
+    popupLogin.classList.add('active');
+    main.classList.add('active');
+
+
+function getRandomSource(sources) {
+    return sources[Math.floor(Math.random() * sources.length)];
+}
+
+function resetResultBox(){
+    const spiderImage = resultBox.querySelector('.spider-image');
+    const randomSource = getRandomSource(imageSources);
+    spiderImage.src = randomSource;
+    spiderImage.alt = "spider gif";
+    var resultText = document.querySelector('.result-text');
+    resultText.textContent = "🕷️ Loading...";
+    var spiderDescription = document.querySelector('.spider-description');
+    spiderDescription.textContent = "";
 }
