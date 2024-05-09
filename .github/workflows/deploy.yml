@@ -75,7 +75,7 @@ jobs:
         host: ${{ env.EC2_IP }}
         username: ubuntu
         key:  ${{ env.EC2_SSH_KEY_VALUE }}
-        source: "${{ inputs.SOURCE_DIR }}/"
+        source: ./${{ inputs.SOURCE_DIR }}/
         rm: true
         target: ${{ inputs.TARGET_DIR }}/
       
