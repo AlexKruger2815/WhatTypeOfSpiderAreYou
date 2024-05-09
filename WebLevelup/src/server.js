@@ -4,6 +4,9 @@ const passport = require('passport');
 const session = require('express-session');
 
 const app = express();
+const ingressPort = process.env.FRONTEND_SERVER_PORT
+const backendHost = process.env.BACKEND_SERVER_HOST
+const backendPort = process.env.BACKEND_SERVER_PORT
 
 app.use(express.static('styles'));
 app.use(express.static('assets'));

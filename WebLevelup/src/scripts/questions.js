@@ -1,3 +1,4 @@
+ const continueBtn2 = document.querySelector('.continue-btn');
 let questions = [];
 
 fetch('http://localhost:3000/api/form')
@@ -16,6 +17,9 @@ fetch('http://localhost:3000/api/form')
           option: option.option
         }))
       };
+      continueBtn.style.backgroundColor = "black";
+      continueBtn.style.color = "white";
+      continueBtn.innerText = "Continue";
       return question;
     });
     questions=formattedQuestions;

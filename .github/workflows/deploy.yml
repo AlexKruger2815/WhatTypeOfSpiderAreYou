@@ -12,13 +12,17 @@ on:
       DOCKER_SERVICE_NAME:
         required: true
         type: string
+    secrets:
       AWS_REGION:
         required: true
-        type: string
       AWS_ROLE:
         required: true
-        type: string
-
+      ENV_S3_URI:
+        required: true
+      EC2_SSH_KEY_NAME:
+        required: true
+      EC2_SSH_KEY_VALUE:
+        required: true
 permissions:
   id-token: write
   contents: read
@@ -36,11 +40,20 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       id: creds
       with:
-        role-to-assume: ${{ inputs.AWS_ROLE }}
-        aws-region: ${{ inputs.AWS_REGION }}
+        role-to-assume: ${{ secrets.AWS_ROLE }}
+        aws-region: ${{ secrets.AWS_REGION }}
         output-credentials: true
         role-session-name: Github-OIDC-TERRAFORM
         audience: sts.amazonaws.com
+
+    - name: setup awscli
+      uses: unfor19/install-aws-cli-action@v1
+      with:
+        version: 2
+    
+    - name: retrieve env file
+      run: |
+          aws s3 cp ${{secrets.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
 
     - name: Set IP env variable
       run: |
@@ -55,7 +68,7 @@ jobs:
         key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
         script: |-
             cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
-            docker compose down ${{ inputs.dockerServiceName }}
+            docker compose down ${{ inputs.DOCKER_SERVICE_NAME }}
 
     - name: Replace code on EC2
       uses: appleboy/scp-action@v0.1.7
@@ -75,4 +88,4 @@ jobs:
         key:  ${{ secrets.EC2_SSH_KEY_VALUE }}
         script: |-
             cd ${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
-            docker compose up -d --build  ${{ inputs.dockerServiceName }}
+            docker compose up -d --build  ${{ inputs.DOCKER_SERVICE_NAME }}
