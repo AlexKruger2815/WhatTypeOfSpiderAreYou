@@ -67,7 +67,8 @@ jobs:
           if [[ -d $DIR ]]; then
             cd $DIR
             docker compose down ${{ inputs.DOCKER_SERVICE_NAME }}
-          fi 
+            sudo rm -rf ${{ inputs.TARGET_DIR }}
+          fi
 
     - name: Replace code on EC2
       uses: appleboy/scp-action@v0.1.7
@@ -75,8 +76,7 @@ jobs:
         host: ${{ env.EC2_IP }}
         username: ubuntu
         key:  ${{ env.EC2_SSH_KEY_VALUE }}
-        source: "${{ inputs.SOURCE_DIR }}/"
-        rm: true
+        source: ./${{ inputs.SOURCE_DIR }}/
         target: ${{ inputs.TARGET_DIR }}/
       
     - name: Start server

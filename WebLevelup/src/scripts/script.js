@@ -12,6 +12,7 @@ const goHomeBtn = document.querySelector('.go-home-btn');
 const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
 const authorizeButton = document.getElementById("loginButton");
+const logoutButton = document.getElementById("logoutButton");
 
 const imageSources = [
     "walking-spider.gif",
@@ -87,8 +88,12 @@ goHomeBtn.onclick = () => {
     questionNumberCounter(questionNumber);
 }
 
-authorizeButton.onfocus = () => {
+authorizeButton.onclick = () => {
     window.location.href = '/auth/github';
+}
+
+logoutButton.onclick = () => {
+    window.location.href = '/logout';
 }
 
 function showQuestions(index) {
