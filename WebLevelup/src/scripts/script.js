@@ -162,7 +162,10 @@ function authorizeUser() {
             main.classList.add('active');
         } 
     })
-    
+    .catch((error) => {
+        console.log('poop');
+        console.log(error);
+      });
 }
 
 function authorizeClicked() {

@@ -35,7 +35,7 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "a013dc3b18da92da9dbe",
         clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: `http://localhost:${ingressPort}/auth/github/callback`
+        callbackURL: `http://localhost:3005/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
@@ -73,14 +73,12 @@ app.get('/logout', (req, res) => {
     req.session.destroy(err => {
       if (err) {
         console.error(err);
-        // Handle error appropriately
       }
       res.redirect('/'); // Redirect to homepage after logout
     });
   });
 
 app.get('/check-session', (req, res) => {
-    console.log(req);
     if (req.session && req.session.user) {
       res.json({ isLoggedIn: true });
     } else {
@@ -88,4 +86,4 @@ app.get('/check-session', (req, res) => {
     }
   });
 
-  app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
+  app.listen(3005, () => console.log(`Server is Running on port ${ingressPort}`));
