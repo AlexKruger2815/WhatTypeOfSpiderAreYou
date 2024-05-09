@@ -11,7 +11,7 @@ const tryAgainBtn = document.querySelector('.retake-btn');
 const goHomeBtn = document.querySelector('.go-home-btn');
 const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
-const authorizeButton = document.getElementById("loginButton"); // Assuming you have a button with this ID
+const authorizeButton = document.getElementById("loginButton");
 
 let spiderIds = [];
 
