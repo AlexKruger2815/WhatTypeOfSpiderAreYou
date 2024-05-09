@@ -1,4 +1,21 @@
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  "name": "src",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+=======
+>>>>>>> bec8546ba84c8f860859e6b3f2981642029874ed
+>>>>>>> 205e23305d36ef94d23e1f08decdbabba0b7ac57
   "dependencies": {
     "express": "^4.19.2",
     "express-session": "^1.18.0",
