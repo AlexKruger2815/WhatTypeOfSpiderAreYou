@@ -184,7 +184,7 @@ body {
     }
 }
 
-.popup-login.logged-in {
+.popup-login.logged-out {
     opacity: 1;
     pointer-events: auto;
     transform: translate(-50%,-50%) scale(1);
