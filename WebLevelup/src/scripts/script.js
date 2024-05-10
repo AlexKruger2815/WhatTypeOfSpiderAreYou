@@ -21,7 +21,6 @@ const imageSources = [
     "dropping-spider.gif",
     "knitting-spider.gif",
 ];
-const backendHost = process.env.BACKEND_SERVER_HOST
 let spiderIds = [];
 
 // document.addEventListener("DOMContentLoaded", authorizeUser);
@@ -152,7 +151,7 @@ function showResultBox() {
     spiderIds=[];
     
     console.log('mode',modeSpider);
-    fetch(`http://${backendHost}:3000/api/spiders/${modeSpider}`)
+    fetch(`http://ec2-52-48-221-236.eu-west-1.compute.amazonaws.com:3000/api/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
