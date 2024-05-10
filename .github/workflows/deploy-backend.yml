@@ -18,3 +18,4 @@ jobs:
       SOURCE_DIR: server
       TARGET_DIR: /home/ubuntu/Backend
       DOCKER_SERVICE_NAME: backend
+      ENV_S3_URI: ${{secrets.BACKEND_ENV}}
