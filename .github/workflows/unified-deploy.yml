@@ -1,0 +1,22 @@
+name: Deploy to EC2
+on:
+  push:
+    branches:
+      - main
+      - dev
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - id: vars
+      run: |
+        echo "::set-output name=stage::${GITHUB_REF#refs/*/}"
+        echo "::set-output name=service::${GITHUB_REF#refs/*/}"
+        echo "values set"
+    - name: Check output
+      run: |
+        echo ${{ steps.vars.outputs.stage }}
+        echo ${{ steps.vars.outputs.service }}
