@@ -59,7 +59,7 @@ jobs:
 
     - name: Set IP env variable
       run: |
-        EC2_IP=$(aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='${{env.INSTANCE_NAME}}']].PublicIpAddress" --output text)
+        EC2_IP=$(aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='${{inputs.INSTANCE_NAME}}']].PublicIpAddress" --output text)
         echo "EC2_IP=$EC2_IP" >> $GITHUB_ENV
         echo $EC2_IP
 
