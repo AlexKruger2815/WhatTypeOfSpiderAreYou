@@ -12,8 +12,14 @@ on:
       DOCKER_SERVICE_NAME:
         required: true
         type: string
+      ENV_S3_URI:
+        required: true
+        type: string
+      INSTANCE_NAME:
+        required: true
+        type: string
+
 env:
-  ENV_S3_URI: ${{ secrets.FRONTEND_ENV }}
   AWS_REGION: "${{ secrets.AWS_REGION }}"
   AWS_ROLE: ${{ secrets.AWS_ROLE }}
   EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
@@ -49,12 +55,13 @@ jobs:
     
     - name: retrieve env file
       run: |
-          aws s3 cp ${{env.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
+          aws s3 cp ${{inputs.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
 
     - name: Set IP env variable
       run: |
-        EC2_IP=$(aws ec2 describe-instances --query "Reservations[*].Instances[?KeyName=='${{ env.EC2_SSH_KEY_NAME }}'].PublicIpAddress" --output text)
+        EC2_IP=$(aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='${{env.INSTANCE_NAME}}']].PublicIpAddress" --output text)
         echo "EC2_IP=$EC2_IP" >> $GITHUB_ENV
+        echo EC2_IP
 
     - name: Stop server
       uses: appleboy/ssh-action@master
