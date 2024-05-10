@@ -33,8 +33,6 @@ Prerequisites:
 * Terraform v1.5.7
 * Node.js v20.12.2
 
-```
-
 ## The Web Designers
 - Alex Kruger
 - Ama Commey
