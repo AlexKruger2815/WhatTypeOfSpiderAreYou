@@ -11,12 +11,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: vars
-      run: |
-        echo "::set-output name=stage::${GITHUB_REF#refs/*/}"
-        echo "::set-output name=service::${GITHUB_REF#refs/*/}"
-        echo "values set"
+
+    - if: github.ref == 'refs/heads/main'
+      run: echo "stage=prod" >> $GITHUB_ENV
+    - if: github.ref != 'refs/heads/main'
+      run: echo "stage=dev" >> $GITHUB_ENV
+
     - name: Check output
       run: |
-        echo ${{ steps.vars.outputs.stage }}
-        echo ${{ steps.vars.outputs.service }}
+        echo stage: ${{ env.stage }}
