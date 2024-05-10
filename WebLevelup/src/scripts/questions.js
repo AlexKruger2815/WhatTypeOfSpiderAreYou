@@ -1,7 +1,7 @@
- const continueBtn2 = document.querySelector('.continue-btn');
+const continueBtn2 = document.querySelector('.continue-btn');
 let questions = [];
 
-fetch('http://localhost:3000/api/form')
+fetch(`http://ec2-52-48-221-236.eu-west-1.compute.amazonaws.com:3000/api/form`)
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');

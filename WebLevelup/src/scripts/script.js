@@ -12,8 +12,8 @@ const tryAgainBtn = document.querySelector('.retake-btn');
 const goHomeBtn = document.querySelector('.go-home-btn');
 const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
-const authorizeButton = document.getElementById("loginButton");
-const logoutButton = document.getElementById("logoutButton");
+// const authorizeButton = document.getElementById("loginButton");
+// const logoutButton = document.getElementById("logoutButton");
 
 const imageSources = [
     "walking-spider.gif",
@@ -24,9 +24,8 @@ const imageSources = [
 ];
 let spiderIds = [];
 
-document.addEventListener("DOMContentLoaded", authorizeUser);
-window.addEventListener("popstate", authorizeUser);
-header.style.display = 'flex';
+// document.addEventListener("DOMContentLoaded", authorizeUser);
+// window.addEventListener("popstate", authorizeUser);
 
 startBtn.onclick = () => {
     popupInfo.classList.add('active');
@@ -93,13 +92,13 @@ goHomeBtn.onclick = () => {
     header.style.display = 'flex';
 }
 
-authorizeButton.onclick = () => {
-    window.location.href = '/auth/github';
-}
+// authorizeButton.onclick = () => {
+//     window.location.href = '/auth/github';
+// }
 
-logoutButton.onclick = () => {
-    window.location.href = '/logout';
-}
+// logoutButton.onclick = () => {
+//     window.location.href = '/logout';
+// }
 
 function showQuestions(index) {
     header.style.display = 'none';
@@ -155,7 +154,7 @@ function showResultBox() {
     spiderIds=[];
     
     console.log('mode',modeSpider);
-    fetch(`http://localhost:3000/api/spiders/${modeSpider}`)
+    fetch(`http://ec2-52-48-221-236.eu-west-1.compute.amazonaws.com:3000/api/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -185,24 +184,24 @@ function showResultBox() {
 
 }
 
-function authorizeUser() {
-    fetch('/check-session')
-    .then(response => response.json())
-    .then(data => {
-        if (data.isLoggedIn) {
-            popupLogin.classList.remove('logged-out');
-            main.classList.remove('active');
-        } else {
-            popupLogin.classList.add('logged-out');
-    main.classList.add('active');
-        }
-    })
-    .catch((error) => {
-        popupLogin.classList.add('logged-out');
-        main.classList.add('active');
-        console.error(error);
-      });
-}
+// function authorizeUser() {
+//     fetch('/check-session')
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.isLoggedIn) {
+//             popupLogin.classList.remove('logged-out');
+//             main.classList.remove('active');
+//         } else {
+//             popupLogin.classList.add('logged-out');
+//     main.classList.add('active');
+//         }
+//     })
+//     .catch((error) => {
+//         popupLogin.classList.add('logged-out');
+//         main.classList.add('active');
+//         console.error(error);
+//       });
+// }
 
 function getRandomSource(sources) {
     return sources[Math.floor(Math.random() * sources.length)];

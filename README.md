@@ -26,36 +26,13 @@ Join us on this mesmerizing journey through the spider realm—where every quest
 
 ## Features
 
-- Instant Motivation: Get a boost of encouragement precisely when you need it.
-- Customizable Messages: Tailor motivational messages to fit your style.
-- Lightweight: Doesn't add any extra weight to your workflow.
+- Find out what spider you are
 
-## Infrastructure Setup
+## Prerequisites
 Prerequisites:
 * Terraform v1.5.7
-1. Navigate to the ./infrastructure directory
-
-## Getting Started
-
-To get started with What Type Of Spider Are You?&copy;, simply clone this repository and follow the installation instructions in the `README.md` (that is me, whom you are currently reading).
-
-Prerequisites:
 * Node.js v20.12.2
 
-```bash
-git clone https://github.com/AlexKruger2815/WhatTypeOfSpiderAreYou.git
-cd WhatTypeOfSpiderAreYou
-```
-
-### Running the API
-```bash
-cd API
-npm start
-```
-
-### Running the CLI
-```bash
-cd frontent
 ```
 
 ## The Web Designers
