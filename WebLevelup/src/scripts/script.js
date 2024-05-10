@@ -3,6 +3,7 @@ const popupInfo = document.querySelector('.popup-info');
 const popupLogin = document.querySelector('.popup-login');
 const exitBtn = document.querySelector('.exit-btn');
 const main = document.querySelector('.main');
+const header = document.querySelector('.header');
 const continueBtn = document.querySelector('.continue-btn');
 const quizSection = document.querySelector('.quiz-section');
 const quizBox = document.querySelector('.quiz-box');
@@ -38,6 +39,7 @@ exitBtn.onclick = () => {
 
 continueBtn.onclick = () => {
     if(questions.length !== 0 ){
+        quizBox.style.display = "flex";
         quizSection.classList.add('active');
         popupInfo.classList.remove('active');
         main.classList.remove('active');
@@ -62,11 +64,13 @@ nextBtn.onclick = () => {
         nextBtn.classList.remove('active');
     }
     else {
+        resultBox.style.display = 'flex';
         showResultBox();
     }
 }
 
 tryAgainBtn.onclick = () => {
+    quizBox.style.display = "flex";
     quizBox.classList.add('active');
     resultBox.classList.remove('active');
     nextBtn.classList.remove('active');
@@ -81,11 +85,11 @@ goHomeBtn.onclick = () => {
     quizSection.classList.remove('active');
     resultBox.classList.remove('active');
     nextBtn.classList.remove('active');
-
     questionCount = 0;
     questionNumber = 1;
     showQuestions(questionCount);
     questionNumberCounter(questionNumber);
+    header.style.display = 'flex';
 }
 
 // authorizeButton.onclick = () => {
@@ -97,7 +101,8 @@ goHomeBtn.onclick = () => {
 // }
 
 function showQuestions(index) {
-
+    header.style.display = 'none';
+    resultBox.style.display = 'none';
     const questionText = document.querySelector('.question-text');
     questionText.textContent = `${index+1}. ${questions[index].question}`;
     let optionTag = '';
@@ -135,10 +140,8 @@ function questionNumberCounter(index) {
 }
 
 function showResultBox() {
-    quizBox.classList.remove('active');
-    
+    quizBox.style.display = 'none';
     const numbers = spiderIds.map(Number);
-    console.log('spiderIds',spiderIds);
     const modeSpider = numbers.reduce((acc, curr) => {
         acc[curr] = (acc[curr] || 0) + 1;
         if (acc[curr] > acc.modeCount) {
@@ -178,6 +181,7 @@ function showResultBox() {
         });
 
     resultBox.classList.add('active');
+
 }
 
 // function authorizeUser() {
