@@ -12,8 +12,11 @@ on:
       DOCKER_SERVICE_NAME:
         required: true
         type: string
+      ENV_S3_URI:
+        required: true
+        type: string
+
 env:
-  ENV_S3_URI: ${{ secrets.FRONTEND_ENV }}
   AWS_REGION: "${{ secrets.AWS_REGION }}"
   AWS_ROLE: ${{ secrets.AWS_ROLE }}
   EC2_SSH_KEY_NAME: ${{ secrets.EC2_SSH_KEY_NAME }}
@@ -49,7 +52,7 @@ jobs:
     
     - name: retrieve env file
       run: |
-          aws s3 cp ${{env.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
+          aws s3 cp ${{inputs.ENV_S3_URI}} ${{ inputs.SOURCE_DIR }}
 
     - name: Set IP env variable
       run: |
