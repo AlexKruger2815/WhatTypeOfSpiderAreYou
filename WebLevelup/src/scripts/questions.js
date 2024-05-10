@@ -1,7 +1,8 @@
- const continueBtn2 = document.querySelector('.continue-btn');
+const continueBtn2 = document.querySelector('.continue-btn');
+const backendHost = process.env.BACKEND_SERVER_HOST
 let questions = [];
 
-fetch('http://localhost:3000/api/form')
+fetch(`http://${backendHost}:3000/api/form`)
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
