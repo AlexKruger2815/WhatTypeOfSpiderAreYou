@@ -17,5 +17,6 @@ jobs:
     with:
       SOURCE_DIR: server
       TARGET_DIR: /home/ubuntu/Backend
-      DOCKER_SERVICE_NAME: backend
-      ENV_S3_URI: s3://spider-type-env-bucket/backend/.env
+      DOCKER_SERVICE_NAME: backend      
+      INSTANCE_NAME: spider-type-server-instance
+      ENV_S3_URI: s3://spider-type-env-bucket/prod/backend/.env
