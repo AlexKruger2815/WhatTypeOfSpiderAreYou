@@ -1,4 +1,4 @@
-name: Deploy Backend to Amazon EC2
+name: "DEV: Deploy Backend to Amazon EC2"
 
 on:
   push:
