@@ -2,7 +2,7 @@ const startBtn = document.querySelector('.take-quiz-btn');
 const popupInfo = document.querySelector('.popup-info');
 const popupLogin = document.querySelector('.popup-login');
 const exitBtn = document.querySelector('.exit-btn');
-const main = document.querySelector('.main');
+const main = document.querySelector('main');
 const continueBtn = document.querySelector('.continue-btn');
 const quizSection = document.querySelector('.quiz-section');
 const quizBox = document.querySelector('.quiz-box');
@@ -13,6 +13,10 @@ const nextBtn = document.querySelector('.next-btn');
 const optionList = document.querySelector('.option-list');
 const authorizeButton = document.getElementById("loginButton");
 const logoutButton = document.getElementById("logoutButton");
+
+const instructions = document.getElementById("instructions");
+const quiz = document.getElementById("quiz");
+const results = document.getElementById("results");
 
 const imageSources = [
     "walking-spider.gif",
@@ -27,21 +31,19 @@ document.addEventListener("DOMContentLoaded", authorizeUser);
 window.addEventListener("popstate", authorizeUser);
 
 startBtn.onclick = () => {
-    popupInfo.classList.add('active');
-    main.classList.add('active');
+    instructions.style.visibility = 'visible';
+    main.classList.add('blur');
 }
 
 exitBtn.onclick = () => {
-    popupInfo.classList.remove('active');
-    main.classList.remove('active');
+    instructions.style.visibility = 'hidden';
+    main.classList.remove('blur');
 }
 
 continueBtn.onclick = () => {
     if(questions.length !== 0 ){
-        quizSection.classList.add('active');
-        popupInfo.classList.remove('active');
-        main.classList.remove('active');
-        quizBox.classList.add('active'); 
+        instructions.style.visibility = 'hidden';
+        quiz.style.visibility = 'visible';
         showQuestions(0);
         questionNumberCounter(1);
     }
@@ -51,6 +53,8 @@ let questionCount = 0;
 let questionNumber = 1;
 
 nextBtn.onclick = () => {
+    nextBtn.classList.remove('active');
+
     if (questionCount < questions.length-1) {
 
         questionCount++;
@@ -59,7 +63,6 @@ nextBtn.onclick = () => {
         questionNumber++;
         questionNumberCounter(questionNumber);
 
-        nextBtn.classList.remove('active');
     }
     else {
         showResultBox();
@@ -135,7 +138,8 @@ function questionNumberCounter(index) {
 }
 
 function showResultBox() {
-    quizBox.classList.remove('active');
+    quiz.style.visibility = 'hidden';
+    results.style.visibility = 'visible';
     
     const numbers = spiderIds.map(Number);
     console.log('spiderIds',spiderIds);

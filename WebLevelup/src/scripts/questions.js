@@ -17,9 +17,9 @@ fetch('http://localhost:3000/api/form')
           option: option.option
         }))
       };
-      continueBtn.style.backgroundColor = "black";
-      continueBtn.style.color = "white";
-      continueBtn.innerText = "Continue";
+      // continueBtn.style.backgroundColor = "black";
+      // continueBtn.style.color = "white";
+      // continueBtn.innerText = "Continue";
       return question;
     });
     questions=formattedQuestions;
