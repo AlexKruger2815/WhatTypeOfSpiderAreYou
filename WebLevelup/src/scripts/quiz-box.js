@@ -86,7 +86,7 @@ function showResultBox() {
 
     spiderIds=[];
     
-    fetch(`http://localhost:3000/api/spiders/${modeSpider}`)
+    fetch(`http://ec2-52-17-61-207.eu-west-1.compute.amazonaws.com:3000/api/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

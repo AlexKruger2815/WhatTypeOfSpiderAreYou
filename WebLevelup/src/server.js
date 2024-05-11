@@ -35,9 +35,9 @@ passport.deserializeUser(function (id, cb) {
 });
 
 passport.use(new GitHubStrategy({
-        clientID: "a013dc3b18da92da9dbe",
-        clientSecret: "b4428e92c60f8938810731e9d9d6c7cdc83103cf",
-        callbackURL: `http://${backendHost}:${ingressPort}/auth/github/callback`
+        clientID: "Ov23lieWK3ScHvDk5nxE",
+        clientSecret: "bb23b02f1efe838b7ee6c97b101210dcfdd55af2",
+        callbackURL: `http://ec2-52-17-61-207.eu-west-1.compute.amazonaws.com/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
