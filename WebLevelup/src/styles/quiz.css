@@ -118,6 +118,22 @@
     border-color: #fff;
 }
 
+.quiz-footer .prev-btn {
+    width: 6.25em; 
+    height: 3.125em; 
+    border: 0.125em solid rgba(255, 255, 255, .1);
+    outline: none;
+    border-radius: 0.375em;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s;
+    pointer-events: auto;
+    background: rgba(111, 57, 187, 0.507);
+    border-color: #fff;
+    color: #fff;
+}
+
 .quiz-section .result-box {
     position: fixed;
     top: 50%;

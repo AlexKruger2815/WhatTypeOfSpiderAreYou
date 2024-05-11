@@ -1,11 +1,34 @@
 const nextBtnQuiz = document.querySelector('.next-btn');
 const header2 = document.querySelector('.header');
+const prevBtnQuiz = document.querySelector('.prev-btn');
 
 let spiderIds = [];
 let questionCount = 0;
 let questionNumber = 1;
 
+prevBtnQuiz.style.display = 'none';
+
+prevBtnQuiz.onclick = () => {
+    if (questionCount > 0) {
+        questionCount--;
+        showQuestions(questionCount);
+        
+        questionNumber--;
+        questionNumberCounter(questionNumber);
+
+        nextBtnQuiz.classList.remove('active');
+
+        nextBtnQuiz.style.display = 'block';
+    }
+        
+    if (questionCount == 0 ){
+        prevBtnQuiz.style.display = 'none';
+    }
+}
+
+
 nextBtnQuiz.onclick = () => {
+
     if (questionCount < questions.length-1) {
 
         questionCount++;
@@ -16,7 +39,13 @@ nextBtnQuiz.onclick = () => {
 
         nextBtnQuiz.classList.remove('active');
     }
-    else {
+
+    if (questionCount > 0 ){
+        prevBtnQuiz.style.display = 'block';
+    }
+
+    if (questionCount == questions.length-1){
+        prevBtnQuiz.style.display = 'none';
         resultBox.style.display = 'flex';
         showResultBox();
     }

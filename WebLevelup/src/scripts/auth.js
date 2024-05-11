@@ -1,7 +1,6 @@
 const authorizeButton = document.getElementById("loginButton");
 const logoutButton = document.getElementById("logoutButton");
 
-
 document.addEventListener("DOMContentLoaded", authorizeUser);
 window.addEventListener("popstate", authorizeUser);
 
@@ -20,9 +19,11 @@ function authorizeUser() {
         if (data.isLoggedIn) {
             popupLogin.classList.remove('logged-out');
             main.classList.remove('active');
+            const usernameHeader = document.getElementById('usernameHeader');
+            usernameHeader.textContent = `Welcome ${data.username}!`;
         } else {
             popupLogin.classList.add('logged-out');
-    main.classList.add('active');
+            main.classList.add('active');
         }
     })
     .catch((error) => {
