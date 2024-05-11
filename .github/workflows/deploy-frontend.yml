@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - WebLevelup/
 permissions:
   id-token: write
   contents: read
@@ -19,3 +17,4 @@ jobs:
       SOURCE_DIR: WebLevelup
       TARGET_DIR: /home/ubuntu/Frontend
       DOCKER_SERVICE_NAME: frontend
+      ENV_S3_URI: s3://spider-type-env-bucket/frontend/.env
