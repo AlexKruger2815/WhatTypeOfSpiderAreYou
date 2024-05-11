@@ -15,6 +15,9 @@ on:
       ENV_S3_URI:
         required: true
         type: string
+      INSTANCE_NAME:
+        required: true
+        type: string
 
 env:
   AWS_REGION: "${{ secrets.AWS_REGION }}"
@@ -56,8 +59,9 @@ jobs:
 
     - name: Set IP env variable
       run: |
-        EC2_IP=$(aws ec2 describe-instances --query "Reservations[*].Instances[?KeyName=='${{ env.EC2_SSH_KEY_NAME }}'].PublicIpAddress" --output text)
+        EC2_IP=$(aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='${{env.INSTANCE_NAME}}']].PublicIpAddress" --output text)
         echo "EC2_IP=$EC2_IP" >> $GITHUB_ENV
+        echo EC2_IP
 
     - name: Stop server
       uses: appleboy/ssh-action@master

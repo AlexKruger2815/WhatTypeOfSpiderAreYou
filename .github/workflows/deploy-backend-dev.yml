@@ -1,0 +1,22 @@
+name: "DEV: Deploy Backend to Amazon EC2"
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy Backend to EC2
+    uses:  AlexKruger2815/WhatTypeOfSpiderAreYou/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      SOURCE_DIR: server
+      TARGET_DIR: /home/ubuntu/Backend
+      DOCKER_SERVICE_NAME: backend
+      INSTANCE_NAME: test-instance
+      ENV_S3_URI: s3://spider-type-env-bucket/dev/backend/.env
