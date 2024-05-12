@@ -1,14 +1,10 @@
-const nextBtnQuiz = document.querySelector('.next-btn');
-const header2 = document.querySelector('.header');
-const prevBtnQuiz = document.querySelector('.prev-btn');
-
 let spiderIds = [];
 let questionCount = 0;
 let questionNumber = 1;
 
-prevBtnQuiz.style.display = 'none';
+prevBtn.style.display = 'none';
 
-prevBtnQuiz.onclick = () => {
+prevBtn.onclick = () => {
     if (questionCount > 0) {
         questionCount--;
         showQuestions(questionCount);
@@ -22,7 +18,7 @@ prevBtnQuiz.onclick = () => {
     }
         
     if (questionCount == 0 ){
-        prevBtnQuiz.style.display = 'none';
+        prevBtn.style.display = 'none';
     }
 }
 
@@ -41,11 +37,11 @@ nextBtn.onclick = () => {
     }
 
     if (questionCount > 0 ){
-        prevBtnQuiz.style.display = 'block';
+        prevBtn.style.display = 'block';
     }
 
     if (questionCount == questions.length-1){
-        prevBtnQuiz.style.display = 'none';
+        prevBtn.style.display = 'none';
         resultBox.style.display = 'flex';
         showResultBox();
     }

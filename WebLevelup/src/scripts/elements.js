@@ -12,3 +12,4 @@ const instructions = document.getElementById("instructions");
 const quiz = document.getElementById("quiz");
 const results = document.getElementById("results");
 const login = document.getElementById("login");
+const prevBtn = document.querySelector('.prev-btn');
