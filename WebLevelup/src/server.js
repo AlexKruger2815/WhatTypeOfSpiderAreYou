@@ -82,7 +82,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/check-session', (req, res) => {
     if (req.session && req.session.user) {
-      res.json({ isLoggedIn: true , username: req.user.username});
+      res.json({ isLoggedIn: true });
     } else {
       res.json({ isLoggedIn: false });
     }
