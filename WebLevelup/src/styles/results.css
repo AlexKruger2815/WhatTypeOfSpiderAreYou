@@ -5,6 +5,7 @@
 #results h2 {
     font-size: 2.6em; 
     color: rgba(111, 57, 187, 0.507);
+    text-align: center;
 }
 
 .spider-image {
@@ -22,6 +23,7 @@
 .result-text {
     font-size: 1.625em; 
     font-weight: 600;
+    text-align: center;
 }
 
 .results-buttons {
