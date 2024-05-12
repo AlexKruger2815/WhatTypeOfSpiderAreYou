@@ -71,7 +71,7 @@ jobs:
         key:  ${{ env.EC2_SSH_KEY_VALUE }}
         script: |
           pwd
-          $DIR=${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
+          DIR=${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
           if [[ -d $DIR ]]; then
             cd $DIR
             docker compose down -v ${{ inputs.DOCKER_SERVICE_NAME }}
