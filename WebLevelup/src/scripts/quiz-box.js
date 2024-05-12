@@ -73,7 +73,6 @@ function showResultBox() {
     results.style.visibility = 'visible';
     
     const numbers = spiderIds.map(Number);
-    console.log('spiderIds',spiderIds);
     const modeSpider = numbers.reduce((acc, curr) => {
         acc[curr] = (acc[curr] || 0) + 1;
         if (acc[curr] > acc.modeCount) {
