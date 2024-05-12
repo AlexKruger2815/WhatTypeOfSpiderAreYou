@@ -17,6 +17,7 @@ const logoutButton = document.getElementById("logoutButton");
 const instructions = document.getElementById("instructions");
 const quiz = document.getElementById("quiz");
 const results = document.getElementById("results");
+const login = document.getElementById("login");
 
 const imageSources = [
     "walking-spider.gif",
@@ -70,9 +71,9 @@ nextBtn.onclick = () => {
 }
 
 tryAgainBtn.onclick = () => {
-    quizBox.classList.add('active');
-    resultBox.classList.remove('active');
     nextBtn.classList.remove('active');
+    quiz.style.visibility = 'visible';
+    results.style.visibility = 'hidden';
 
     questionCount = 0;
     questionNumber = 1;
@@ -81,14 +82,9 @@ tryAgainBtn.onclick = () => {
 }
 
 goHomeBtn.onclick = () => {
-    quizSection.classList.remove('active');
-    resultBox.classList.remove('active');
     nextBtn.classList.remove('active');
-
-    questionCount = 0;
-    questionNumber = 1;
-    showQuestions(questionCount);
-    questionNumberCounter(questionNumber);
+    main.classList.remove('blur');
+    results.style.visibility = 'hidden';
 }
 
 authorizeButton.onclick = () => {
@@ -167,21 +163,20 @@ function showResultBox() {
                 const description = spiderData.Description;
                 const imageLink = spiderData.ImageLink;
 
-                const resultBox = document.querySelector('.result-box');
-                const spiderImage = resultBox.querySelector('.spider-image');
-                const resultText = resultBox.querySelector('.result-text');
-                const spiderDescription = resultBox.querySelector('.spider-description');
+                const spiderImage = document.querySelector('.spider-image');
+                const resultText = document.querySelector('.result-text');
+                const spiderDescription = document.querySelector('.spider-description');
 
                 spiderImage.src = imageLink;
                 spiderImage.alt = name;
-                resultText.textContent = `Your Spider Type: ${name}`;
+                resultText.textContent = `You are the ${name}`;
                 spiderDescription.textContent = description;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
 
-    resultBox.classList.add('active');
+    results.style.visibility = 'visible';
 }
 
 function authorizeUser() {
@@ -189,16 +184,16 @@ function authorizeUser() {
     .then(response => response.json())
     .then(data => {
         if (data.isLoggedIn) {
-            popupLogin.classList.remove('logged-out');
-            main.classList.remove('active');
+            login.style.visibility = 'hidden';
+            main.classList.remove('blur');
         } else {
-            popupLogin.classList.add('logged-out');
-    main.classList.add('active');
+            login.style.visibility = 'visible';
+            main.classList.add('blur');
         }
     })
     .catch((error) => {
-        popupLogin.classList.add('logged-out');
-        main.classList.add('active');
+        login.style.visibility = 'visible';
+        main.classList.add('blur');
         console.error(error);
       });
 }
@@ -208,7 +203,7 @@ function getRandomSource(sources) {
 }
 
 function resetResultBox(){
-    const spiderImage = resultBox.querySelector('.spider-image');
+    const spiderImage = document.querySelector('.spider-image');
     const randomSource = getRandomSource(imageSources);
     spiderImage.src = randomSource;
     spiderImage.alt = "spider gif";
