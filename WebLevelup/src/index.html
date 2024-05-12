@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="general.css">
     <link rel="stylesheet" href="quiz.css">
     <link rel="stylesheet" href="results.css">
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="instructions.css">
     <link rel="stylesheet" href="home.css">
+    <script src="elements.js" defer></script>
     <script src="home-section.js" defer></script>
     <script src="questions.js" defer></script>
     <script src="quiz-box.js" defer></script>
@@ -19,65 +21,60 @@
     <!-- <script src="script.js"  defer> </script> -->
 
   </head>
-  <body >
-    <main class="main">
-    <header class="header">
-      <h2>Welcome!</h2>
-      <!-- <button id="logoutButton" class="log-out-btn">Log Out</button> -->
-      <!-- <button id="logoutButton" class="log-out-btn">Log Out</button> -->
-    </header>
-    <section class="container">
-      <section class="quiz-section">
-        <section class="quiz-box">
-          <h1 class="question-text">Question 1</h1>
-          <section class="option-list"></section>
-          <footer class="quiz-footer">
-            <span class="question-total"></span>
-            <button class="prev-btn">Previous</button>
-            <button class="next-btn">Next</button>
-          </footer>
-        </section>
-        <section class="result-box">
-          <h2>Quiz Results!</h2>
-          <img class="spider-image" src="weaving-spider.gif" alt="">
-          <span class="result-text">Calculating Spider Type</span>
-          <p class="spider-description"></p>
-          <footer class="buttons">
-            <button class="retake-btn">Re-Take Quiz</button>
-            <button class="go-home-btn">Home</button>
-          </footer>
-        </section>
-      </section>
-      <section class="home">
-        <article class="home-content">
-          <h1>What type of spider are you?</h1>
-          <p>Embark on the Quest: As soon as you enter our spider lair, you'll be greeted with intriguing questions
-            designed to unravel your spider persona. From favorite foods to secret talents, every answer weaves a unique
-            web of possibilities!</p>
-          <button class="take-quiz-btn">Take Quiz</button>
-        </article>
-      </section>
-    </section>
-  </main>
+  <body>
 
-  <aside class="popup-login">
-    <h2>Login</h2>
-    <p>No. Go authorize yourself.</p>
-    <button id="loginButton" class="info-btn">Authorize</button>
-  </aside>
-
-<aside class="popup-info">
-  <h2>Quiz Instructions</h2>
-  <span class="info">1. Answer each question honestly.</span>
-  <span class="info">2. There are no right or wrong answers.</span>
-  <span class="info">3. Choose the option that best reflects your personality.</span>
-  <span class="info">4. Do not spend too much time on any single question.</span>
-  <span class="info">5. Click Continue to get started.</span>
-  <nav class="btn-group">
-    <button class="info-btn exit-btn">Exit Quiz</button>
-    <a href="#" class="info-btn continue-btn">Loading...</a>
-  </nav>
-</aside>
-
+    <main>
+      <header>
+        <h2>Welcome user!</h2>
+        <button class="log-out-btn">Log Out</button>
+      </header>
+      <article class="content">
+        <h1>What Type of Spider Are You?</h1>
+        <p>Embark on the Quest: As soon as you enter our spider lair, you'll be greeted with intriguing questions designed to unravel your spider persona. From favorite foods to secret talents, every answer weaves a unique web of possibilities!</p>
+        <button class="take-quiz-btn">Take Quiz</button>
+      </article>
+    </main>
+  
+    <dialog id="instructions">
+      <h2 class="instructions-header">Quiz Instructions</h2>
+      <ol class="info">
+        <li>Answer each question honestly.</li>
+        <li>There are no right or wrong answers.</li>
+        <li>Choose the option that best reflects your personality.</li>
+        <li>Do not spend too much time on any single question.</li>
+        <li>Click Continue to get started.</li>
+      </ol>
+      <footer class="instructions-buttons">
+        <button class="exit-btn">Close</button>
+        <button class="continue-btn">Loading...</button>
+      </footer>
+    </dialog>
+  
+    <dialog id="quiz">
+        <h1 class="question-text"></h1>
+        <section class="option-list"></section>
+        <footer class="quiz-footer">
+          <p class="question-total"></p>
+          <button class="next-btn">Next</button>
+        </footer>
+    </dialog>
+  
+    <dialog id="results">
+      <h2>Quiz Results!</h2>
+      <img class="spider-image" src="weaving-spider.gif" alt="">
+      <span class="result-text">Calculating Spider Type</span>
+      <p class="spider-description"></p>
+      <footer class="results-buttons">
+        <button class="retake-btn">Re-Take Quiz</button>
+        <button class="go-home-btn">Home</button>
+      </footer>
+    </dialog>
+  
+    <dialog id="login">
+      <h2>Login</h2>
+      <p>No. Go authorize yourself.</p>
+      <button class="log-in-btn">Authorize</button>
+    </dialog>
+  
   </body>
 </html>

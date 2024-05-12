@@ -16,7 +16,7 @@ jobs:
     secrets: inherit
     with:
       SOURCE_DIR: WebLevelup
-      TARGET_DIR: /home/ubuntu/Frontend
+      TARGET_DIR: Frontend
       DOCKER_SERVICE_NAME: frontend
       INSTANCE_NAME: test-instance
       ENV_S3_URI: s3://spider-type-env-bucket/dev/frontend/.env

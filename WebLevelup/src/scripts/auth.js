@@ -1,10 +1,7 @@
-const authorizeButton = document.getElementById("loginButton");
-const logoutButton = document.getElementById("logoutButton");
-
 document.addEventListener("DOMContentLoaded", authorizeUser);
 window.addEventListener("popstate", authorizeUser);
 
-authorizeButton.onclick = () => {
+loginButton.onclick = () => {
     window.location.href = '/auth/github';
 }
 
@@ -17,16 +14,16 @@ function authorizeUser() {
     .then(response => response.json())
     .then(data => {
         if (data.isLoggedIn) {
-            popupLogin.classList.remove('logged-out');
-            main.classList.remove('active');
+            login.style.visibility = 'hidden';
+            main.classList.remove('blur');
         } else {
-            popupLogin.classList.add('logged-out');
-            main.classList.add('active');
+            login.style.visibility = 'visible';
+            main.classList.add('blur');
         }
     })
     .catch((error) => {
-        popupLogin.classList.add('logged-out');
-        main.classList.add('active');
+        login.style.visibility = 'visible';
+        main.classList.add('blur');
         console.error(error);
       });
 }

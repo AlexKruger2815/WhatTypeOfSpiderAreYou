@@ -27,7 +27,8 @@ prevBtnQuiz.onclick = () => {
 }
 
 
-nextBtnQuiz.onclick = () => {
+nextBtn.onclick = () => {
+    nextBtn.classList.remove('active');
 
     if (questionCount < questions.length-1) {
 
@@ -37,7 +38,6 @@ nextBtnQuiz.onclick = () => {
         questionNumber++;
         questionNumberCounter(questionNumber);
 
-        nextBtnQuiz.classList.remove('active');
     }
 
     if (questionCount > 0 ){
@@ -51,10 +51,8 @@ nextBtnQuiz.onclick = () => {
     }
 }
 
-
 function showQuestions(index) {
-    header2.style.display = 'none';
-    resultBox.style.display = 'none';
+
     const questionText = document.querySelector('.question-text');
     questionText.textContent = `${index+1}. ${questions[index].question}`;
     let optionTag = '';
@@ -79,7 +77,7 @@ function optionSelected(answer) {
     });
     let userAnswer = answer.textContent;
     answer.classList.add('selected')
-    nextBtnQuiz.classList.add('active');
+    nextBtn.classList.add('active');
 
     const spiderID = questions[questionCount].options.find(option => option.option === userAnswer).spiderID;
 
@@ -90,9 +88,60 @@ function questionNumberCounter(index) {
     const questionTotal = document.querySelector('.question-total');
     questionTotal.textContent = `${index} of ${questions.length} Questions`
 }
-function resetResultBox(){
-    const spiderImage = resultBox.querySelector('.spider-image');
-    const randomSource = "weaving-spider.gif";
+
+function showResultBox() {
+    quiz.style.visibility = 'hidden';
+    results.style.visibility = 'visible';
+    
+    const numbers = spiderIds.map(Number);
+    console.log('spiderIds',spiderIds);
+    const modeSpider = numbers.reduce((acc, curr) => {
+        acc[curr] = (acc[curr] || 0) + 1;
+        if (acc[curr] > acc.modeCount) {
+            acc.mode = curr;
+            acc.modeCount = acc[curr];
+        }
+        return acc;
+    }, { mode: null, modeCount: -1 }).mode;
+
+    spiderIds=[];
+    
+    console.log('mode',modeSpider);
+    fetch(`http://localhost:3000/api/spiders/${modeSpider}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(spiderData => {
+                const name = spiderData.Name;
+                const description = spiderData.Description;
+                const imageLink = spiderData.ImageLink;
+
+                const spiderImage = document.querySelector('.spider-image');
+                const resultText = document.querySelector('.result-text');
+                const spiderDescription = document.querySelector('.spider-description');
+
+                spiderImage.src = imageLink;
+                spiderImage.alt = name;
+                resultText.textContent = `You are the ${name}`;
+                spiderDescription.textContent = description;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    results.style.visibility = 'visible';
+}
+
+function getRandomSource(sources) {
+    return sources[Math.floor(Math.random() * sources.length)];
+}
+
+function resetResultBox() {
+    const spiderImage = document.querySelector('.spider-image');
+    const randomSource = getRandomSource(imageSources);
     spiderImage.src = randomSource;
     spiderImage.alt = "spider gif";
     var resultText = document.querySelector('.result-text');
@@ -115,7 +164,7 @@ function showResultBox() {
 
     spiderIds=[];
     
-    fetch(`http://ec2-52-17-61-207.eu-west-1.compute.amazonaws.com:3000/api/spiders/${modeSpider}`)
+    fetch(`/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -123,19 +172,19 @@ function showResultBox() {
             return response.json();
         })
         .then(spiderData => {
-                const name = spiderData.Name;
-                const description = spiderData.Description;
-                const imageLink = spiderData.ImageLink;
+            const name = spiderData.Name;
+            const description = spiderData.Description;
+            const imageLink = spiderData.ImageLink;
 
-                const resultBox = document.querySelector('.result-box');
-                const spiderImage = resultBox.querySelector('.spider-image');
-                const resultText = resultBox.querySelector('.result-text');
-                const spiderDescription = resultBox.querySelector('.spider-description');
+            const resultBox = document.querySelector('.result-box');
+            const spiderImage = resultBox.querySelector('.spider-image');
+            const resultText = resultBox.querySelector('.result-text');
+            const spiderDescription = resultBox.querySelector('.spider-description');
 
-                spiderImage.src = imageLink;
-                spiderImage.alt = name;
-                resultText.textContent = `Your Spider Type: ${name}`;
-                spiderDescription.textContent = description;
+            spiderImage.src = imageLink;
+            spiderImage.alt = name;
+            resultText.textContent = `Your Spider Type: ${name}`;
+            spiderDescription.textContent = description;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
