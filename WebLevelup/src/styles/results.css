@@ -1,4 +1,62 @@
-.result-box h2 {
+#results {
+    align-items: center;
+}
+
+#results h2 {
+    font-size: 2.6em; 
+    color: rgba(111, 57, 187, 0.507);
+}
+
+.spider-image {
+   width: 21.75em; 
+   height: 11.75em;
+   max-width: 100%; 
+   max-height: 100%; 
+}
+
+.spider-description {
+    font-size: 1.125em; 
+    font-weight: 400;
+    text-align: center;
+}
+.result-text {
+    font-size: 1.625em; 
+    font-weight: 600;
+}
+
+.results-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 0.0625em solid #3c3a3a;
+    padding-top: 0.5em;
+    width: 100%;
+}
+
+.results-buttons .retake-btn {
+    width: 8.125em; 
+    height: 2.75em; 
+    background: transparent;
+    font-size: 1em;
+    letter-spacing: 0.0625em; 
+    font-weight: 600;
+}
+
+.results-buttons .retake-btn:hover {
+    background: rgba(111, 57, 187, 0.507);
+    box-shadow: none;
+    color: #fff;
+}
+
+.results-buttons .go-home-btn {
+    width: 8.125em; 
+    height: 2.75em;
+    font-size: 1em;
+    letter-spacing: 0.0625em; 
+    font-weight: 600;
+}
+
+/* .result-box h2 {
     margin-top: 0.625em; 
     font-size: 2.6em; 
     color: rgba(111, 57, 187, 0.507);
@@ -24,4 +82,4 @@
 
 .result-box .buttons {
     display: flex;
-}
+} */

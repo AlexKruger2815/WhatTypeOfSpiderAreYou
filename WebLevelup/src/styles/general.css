@@ -8,6 +8,70 @@
     font-family: 'Poppins', sans-serif;
 }
 
+button {
+    background-color: #a8a8a8;
+    border: 0.125em solid rgba(206, 204, 204, 0.727); 
+    border-radius: 0.375em; 
+    box-shadow: 0 0 0.625em #e6e6e6;
+    color: black;
+    cursor: pointer;
+}
+
+button:hover {
+    background: rgba(111, 57, 187, 0.507);
+    box-shadow: none;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    min-height: 100vh; 
+    transition: .3s ease;
+    pointer-events: auto;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: url('background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: auto;
+}
+
+.blur {
+    filter: blur(0.9em);
+    pointer-events: none;
+}
+
+dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: none;
+    border-radius: 0.375em; 
+    padding: 0.625em 1.5625em; 
+    transform: translate(-50%,-50%) scale(.9); 
+    background-color: white;
+    max-width: 70%;
+    max-height: 92%;
+    overflow: auto;
+    visibility: hidden;
+}
+/* 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
     color: #fff;
     background: #000;
@@ -56,7 +120,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: 700;
-    filter: drop-shadow(0 0 1vw rgba(111, 57, 187, 0.507)) drop-shadow(0 0 0.5vw rgba(111, 57, 187, 0.507)); /* Add a glow filter */
+    filter: drop-shadow(0 0 1vw rgba(111, 57, 187, 0.507)) drop-shadow(0 0 0.5vw rgba(111, 57, 187, 0.507));
   }
 
 .main {
@@ -112,4 +176,4 @@ body {
 .buttons button:nth-child(2):hover {
     background: #4d4d4d;
     color: #fff;
-}
+} */
