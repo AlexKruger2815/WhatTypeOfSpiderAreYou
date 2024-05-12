@@ -1,24 +1,22 @@
 let spiderIds = [];
 let questionCount = 0;
-let questionNumber = 1;
 
-prevBtn.style.display = 'none';
+prevBtn.style.visibility = 'hidden';
 
 prevBtn.onclick = () => {
     if (questionCount > 0) {
         questionCount--;
         showQuestions(questionCount);
-        
-        questionNumber--;
-        questionNumberCounter(questionNumber);
 
-        nextBtnQuiz.classList.remove('active');
+        questionNumberCounter(questionCount+1);
 
-        nextBtnQuiz.style.display = 'block';
+        nextBtn.classList.remove('active');
+
+        nextBtn.style.visibility = 'visible';
     }
-        
-    if (questionCount == 0 ){
-        prevBtn.style.display = 'none';
+
+    if (questionCount == 0) {
+        prevBtn.style.visibility = 'hidden';
     }
 }
 
@@ -26,25 +24,23 @@ prevBtn.onclick = () => {
 nextBtn.onclick = () => {
     nextBtn.classList.remove('active');
 
-    if (questionCount < questions.length-1) {
+    if (questionCount < questions.length - 1) {
 
         questionCount++;
         showQuestions(questionCount);
 
-        questionNumber++;
-        questionNumberCounter(questionNumber);
+        questionNumberCounter(questionCount+1);
+
+        if (questionCount > 0 && questionCount < questions.length) {
+            prevBtn.style.visibility = 'visible';
+        }
 
     }
 
     else {
-        prevBtn.style.display = 'none';
-        results.style.display = 'flex';
         showResultBox();
     }
 
-    if (questionCount > 0 ){
-        prevBtn.style.display = 'block';
-    }
 }
 
 function showQuestions(index) {
@@ -98,8 +94,10 @@ function questionNumberCounter(index) {
 
 function showResultBox() {
     quiz.style.visibility = 'hidden';
+    nextBtn.style.visibility = 'hidden';
+    prevBtn.style.visibility = 'hidden';
     results.style.visibility = 'visible';
-    
+
     const numbers = spiderIds.map(Number);
     const modeSpider = numbers.reduce((acc, curr) => {
         acc[curr] = (acc[curr] || 0) + 1;
@@ -110,8 +108,8 @@ function showResultBox() {
         return acc;
     }, { mode: null, modeCount: -1 }).mode;
 
-    spiderIds=[];
-    
+    spiderIds = [];
+
     fetch(`/spiders/${modeSpider}`)
         .then(response => {
             if (!response.ok) {
@@ -120,18 +118,18 @@ function showResultBox() {
             return response.json();
         })
         .then(spiderData => {
-                const name = spiderData.Name;
-                const description = spiderData.Description;
-                const imageLink = spiderData.ImageLink;
+            const name = spiderData.Name;
+            const description = spiderData.Description;
+            const imageLink = spiderData.ImageLink;
 
-                const spiderImage = document.querySelector('.spider-image');
-                const resultText = document.querySelector('.result-text');
-                const spiderDescription = document.querySelector('.spider-description');
+            const spiderImage = document.querySelector('.spider-image');
+            const resultText = document.querySelector('.result-text');
+            const spiderDescription = document.querySelector('.spider-description');
 
-                spiderImage.src = imageLink;
-                spiderImage.alt = name;
-                resultText.textContent = `You are the ${name}`;
-                spiderDescription.textContent = description;
+            spiderImage.src = imageLink;
+            spiderImage.alt = name;
+            resultText.textContent = `You are the ${name}`;
+            spiderDescription.textContent = description;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
