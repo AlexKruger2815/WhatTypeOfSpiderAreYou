@@ -2,11 +2,13 @@ const express = require('express');
 const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
 const session = require('express-session');
+const endpoints = require("./routes");
+
+const ingressPort = process.env.FRONTEND_SERVER_PORT
+const host = process.env.BACKEND_SERVER_HOST
 
 const app = express();
-const ingressPort = process.env.FRONTEND_SERVER_PORT
-const backendHost = process.env.BACKEND_SERVER_HOST
-const backendPort = process.env.BACKEND_SERVER_PORT
+app.use("/", endpoints)
 
 app.use(express.static('styles'));
 app.use(express.static('assets'));
@@ -37,7 +39,7 @@ passport.deserializeUser(function (id, cb) {
 passport.use(new GitHubStrategy({
         clientID: "Ov23lieWK3ScHvDk5nxE",
         clientSecret: "bb23b02f1efe838b7ee6c97b101210dcfdd55af2",
-        callbackURL: `http://${backendHost}/auth/github/callback`
+        callbackURL: `http://${host}/auth/github/callback`
     },
     function (accessToken, refreshToken, profile, cb) {
         cb(null, profile);
@@ -78,7 +80,7 @@ app.get('/logout', (req, res) => {
       }
       res.redirect('/'); // Redirect to homepage after logout
     });
-  });
+});
 
 app.get('/check-session', (req, res) => {
     if (req.session && req.session.user) {
@@ -86,6 +88,6 @@ app.get('/check-session', (req, res) => {
     } else {
       res.json({ isLoggedIn: false });
     }
-  });
+});
 
-  app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
+app.listen(ingressPort, () => console.log(`Server is Running on port ${ingressPort}`));
