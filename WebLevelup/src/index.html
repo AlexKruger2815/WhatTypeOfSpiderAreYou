@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz.</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz.</title>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="results.css">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="elements.js" defer></script>
+    <script src="home-section.js" defer></script>
+    <script src="questions.js" defer></script>
+    <script src="quiz-box.js" defer></script>
+    <script src="results.js" defer></script> 
+    <script src="auth.js" defer></script> 
+    <!-- <script src="script.js"  defer> </script> -->
 
-<body>
-  <main class="main">
+  </head>
+  <body >
+    <main class="main">
     <header class="header">
       <h2>Welcome user!</h2>
-      <button id="logoutButton" class="log-out-btn">Log Out</button>
+      <!-- <button id="logoutButton" class="log-out-btn">Log Out</button> -->
+      <!-- <button id="logoutButton" class="log-out-btn">Log Out</button> -->
     </header>
-
     <section class="container">
       <section class="quiz-section">
         <section class="quiz-box">
@@ -38,11 +49,12 @@
         </section>
       </section>
       <section class="home">
-        <section class="home-content">
+        <article class="home-content">
           <h1>What type of spider are you?</h1>
-          <p>Embark on the Quest: As soon as you enter our spider lair, you'll be greeted with intriguing questions designed to unravel your spider persona. From favorite foods to secret talents, every answer weaves a unique web of possibilities!</p>
+          <p>Embark on the Quest: As soon as you enter our spider lair, you'll be greeted with intriguing questions
+            designed to unravel your spider persona. Each answer spins a unique web of possibilities, exploring various aspects of your character!</p>
           <button class="take-quiz-btn">Take Quiz</button>
-        </section>
+        </article>
       </section>
     </section>
   </main>
@@ -53,20 +65,18 @@
     <button id="loginButton" class="info-btn">Authorize</button>
   </aside>
 
-  <aside class="popup-info">
-    <h2>Quiz Instructions</h2>
-    <span class="info">1. Answer each question honestly.</span>
-    <span class="info">2. There are no right or wrong answers.</span>
-    <span class="info">3. Choose the option that best reflects your personality.</span>
-    <span class="info">4. Do not spend too much time on any single question.</span>
-    <span class="info">5. Click Continue to get started.</span>
-    <nav class="btn-group">
-      <button class="info-btn exit-btn">Exit Quiz</button>
-      <a href="#" class="info-btn continue-btn">Loading...</a>
-    </nav>
-  </aside>
+<aside class="popup-info">
+  <h2>Quiz Instructions</h2>
+  <span class="info">1. Answer each question honestly.</span>
+  <span class="info">2. There are no right or wrong answers.</span>
+  <span class="info">3. Choose the option that best reflects your personality.</span>
+  <span class="info">4. Do not spend too much time on any single question.</span>
+  <span class="info">5. Click Continue to get started.</span>
+  <nav class="btn-group">
+    <button class="info-btn exit-btn">Exit Quiz</button>
+    <a href="#" class="info-btn continue-btn">Loading...</a>
+  </nav>
+</aside>
 
-  <script src="questions.js"></script>
-  <script src="script.js"></script>
-</body>
+  </body>
 </html>

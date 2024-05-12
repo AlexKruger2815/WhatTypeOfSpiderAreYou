@@ -69,11 +69,12 @@ jobs:
         host: ${{ env.EC2_IP }}
         username: ubuntu
         key:  ${{ env.EC2_SSH_KEY_VALUE }}
-        script: |-
-          $DIR=${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
+        script: |
+          pwd
+          DIR=${{ inputs.TARGET_DIR }}/${{ inputs.SOURCE_DIR }}
           if [[ -d $DIR ]]; then
             cd $DIR
-            docker compose down -v ${{ inputs.DOCKER_SERVICE_NAME }}
+            docker compose down --volumes ${{ inputs.DOCKER_SERVICE_NAME }}
             sudo rm -rf ${{ inputs.TARGET_DIR }}
           fi
 
