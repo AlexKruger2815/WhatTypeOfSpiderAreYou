@@ -1,0 +1,103 @@
+header {
+    padding: 1em;
+    background: rgba(95, 95, 95, 0.727);
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-out-btn {
+    width: 5.5em; 
+    height: 2.125em; 
+    font-size: 1em;
+    letter-spacing: 0.0625em; 
+    font-weight: 600;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.875em;;
+    max-width: 40em; 
+    margin: auto;
+}
+
+.content h1{
+    font-size: 4.5vw; 
+    font-weight: 700;
+    text-shadow: 0 0 0.3125em rgba(0, 0, 0, .3);
+    text-align: center;
+}
+
+.content p {
+    font-size: 1.2em; 
+    text-align: center;
+    text-shadow: 0 0 0.3125em rgba(0, 0, 0, .3); 
+    border: 0.125em solid #fff; 
+    border-radius: 0.625em; 
+    padding: 0.625em; 
+    background-color:  rgba(38, 24, 57, 0.908);
+}
+
+.content .take-quiz-btn {
+  width: 9.5em; 
+  height: 3.125em; 
+  font-size: 1em;
+  letter-spacing: 0.0625em; 
+  font-weight: 600;
+}
+
+/* .home {
+    position: relative;
+    left: -50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content {
+    max-width: 40em; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-content h1{
+    font-size: 4.5vw; 
+    font-weight: 700;
+    text-shadow: 0 0 0.3125em rgba(0, 0, 0, .3);
+}
+
+.home-content p {
+    font-size: 1.2em; 
+    text-align: center;
+    text-shadow: 0 0 0.3125em rgba(0, 0, 0, .3); 
+    margin-bottom: 1.875em;
+    color: #fff; 
+    border: 0.125em solid #fff; 
+    border-radius: 0.625em; 
+    padding: 0.625em; 
+    background-color:  rgba(38, 24, 57, 0.908);
+  }
+  
+
+.home-content .take-quiz-btn {
+  width: 9.5em; 
+  height: 3.125em; 
+  background-color: #a8a8a8;
+  border: 0.125em solid rgba(206, 204, 204, 0.727); 
+  border-radius: 0.375em; 
+  box-shadow: 0 0 0.625em #e6e6e6; 
+  font-size: 1em;
+  color: #565656;
+  letter-spacing: 0.0625em; 
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.home-content .take-quiz-btn:hover {
+    background: rgba(111, 57, 187, 0.507);
+    box-shadow: none;
+    color: #fff;
+} */

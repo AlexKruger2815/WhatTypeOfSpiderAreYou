@@ -1,50 +1,4 @@
-const startBtn = document.querySelector('.take-quiz-btn');
-const exitBtn = document.querySelector('.exit-btn');
-const main = document.querySelector('main');
-const continueBtn = document.querySelector('.continue-btn');
-const tryAgainBtn = document.querySelector('.retake-btn');
-const goHomeBtn = document.querySelector('.go-home-btn');
-const nextBtn = document.querySelector('.next-btn');
-const optionList = document.querySelector('.option-list');
-const authorizeButton = document.getElementById("loginButton");
-const logoutButton = document.getElementById("logoutButton");
-
-const instructions = document.getElementById("instructions");
-const quiz = document.getElementById("quiz");
-const results = document.getElementById("results");
-const login = document.getElementById("login");
-
-const imageSources = [
-    "walking-spider.gif",
-    "weaving-spider.gif",
-    "dancing-spider.gif",
-    "dropping-spider.gif",
-    "knitting-spider.gif",
-];
 let spiderIds = [];
-
-document.addEventListener("DOMContentLoaded", authorizeUser);
-window.addEventListener("popstate", authorizeUser);
-
-startBtn.onclick = () => {
-    instructions.style.visibility = 'visible';
-    main.classList.add('blur');
-}
-
-exitBtn.onclick = () => {
-    instructions.style.visibility = 'hidden';
-    main.classList.remove('blur');
-}
-
-continueBtn.onclick = () => {
-    if(questions.length !== 0 ){
-        instructions.style.visibility = 'hidden';
-        quiz.style.visibility = 'visible';
-        showQuestions(0);
-        questionNumberCounter(1);
-    }
-}
-
 let questionCount = 0;
 let questionNumber = 1;
 
@@ -63,31 +17,6 @@ nextBtn.onclick = () => {
     else {
         showResultBox();
     }
-}
-
-tryAgainBtn.onclick = () => {
-    nextBtn.classList.remove('active');
-    quiz.style.visibility = 'visible';
-    results.style.visibility = 'hidden';
-
-    questionCount = 0;
-    questionNumber = 1;
-    showQuestions(questionCount);
-    questionNumberCounter(questionNumber);
-}
-
-goHomeBtn.onclick = () => {
-    nextBtn.classList.remove('active');
-    main.classList.remove('blur');
-    results.style.visibility = 'hidden';
-}
-
-authorizeButton.onclick = () => {
-    window.location.href = '/auth/github';
-}
-
-logoutButton.onclick = () => {
-    window.location.href = '/logout';
 }
 
 function showQuestions(index) {
@@ -174,30 +103,11 @@ function showResultBox() {
     results.style.visibility = 'visible';
 }
 
-function authorizeUser() {
-    fetch('/check-session')
-    .then(response => response.json())
-    .then(data => {
-        if (data.isLoggedIn) {
-            login.style.visibility = 'hidden';
-            main.classList.remove('blur');
-        } else {
-            login.style.visibility = 'visible';
-            main.classList.add('blur');
-        }
-    })
-    .catch((error) => {
-        login.style.visibility = 'visible';
-        main.classList.add('blur');
-        console.error(error);
-      });
-}
-
 function getRandomSource(sources) {
     return sources[Math.floor(Math.random() * sources.length)];
 }
 
-function resetResultBox(){
+function resetResultBox() {
     const spiderImage = document.querySelector('.spider-image');
     const randomSource = getRandomSource(imageSources);
     spiderImage.src = randomSource;
@@ -206,4 +116,48 @@ function resetResultBox(){
     resultText.textContent = "🕷️ Loading...";
     var spiderDescription = document.querySelector('.spider-description');
     spiderDescription.textContent = "";
+}
+
+function showResultBox() {
+    quizBox.style.display = 'none';
+    const numbers = spiderIds.map(Number);
+    const modeSpider = numbers.reduce((acc, curr) => {
+        acc[curr] = (acc[curr] || 0) + 1;
+        if (acc[curr] > acc.modeCount) {
+            acc.mode = curr;
+            acc.modeCount = acc[curr];
+        }
+        return acc;
+    }, { mode: null, modeCount: -1 }).mode;
+
+    spiderIds=[];
+    
+    fetch(`/spiders/${modeSpider}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(spiderData => {
+            const name = spiderData.Name;
+            const description = spiderData.Description;
+            const imageLink = spiderData.ImageLink;
+
+            const resultBox = document.querySelector('.result-box');
+            const spiderImage = resultBox.querySelector('.spider-image');
+            const resultText = resultBox.querySelector('.result-text');
+            const spiderDescription = resultBox.querySelector('.spider-description');
+
+            spiderImage.src = imageLink;
+            spiderImage.alt = name;
+            resultText.textContent = `Your Spider Type: ${name}`;
+            spiderDescription.textContent = description;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    resultBox.classList.add('active');
+
 }
