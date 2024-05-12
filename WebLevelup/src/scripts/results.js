@@ -1,11 +1,11 @@
 tryAgainBtn.onclick = () => {
     nextBtn.classList.remove('active');
+    nextBtn.style.visibility = 'visible';
     quiz.style.visibility = 'visible';
     results.style.visibility = 'hidden';
     questionCount = 0;
-    questionNumber = 1;
     showQuestions(questionCount);
-    questionNumberCounter(questionNumber);
+    questionNumberCounter(questionCount+1);
 }
 
 goHomeBtn.onclick = () => {
@@ -13,7 +13,6 @@ goHomeBtn.onclick = () => {
     main.classList.remove('blur');
     results.style.visibility = 'hidden';
     questionCount = 0;
-    questionNumber = 1;
     showQuestions(questionCount);
-    questionNumberCounter(questionNumber);
+    questionNumberCounter(questionCount+1);
 }
