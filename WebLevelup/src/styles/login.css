@@ -1,4 +1,26 @@
+#login {
+    min-width: 30%;
+}
 
+#login h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+#login p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
+#login .log-in-btn {
+    width: 100%; 
+    height: 2.75em;
+    font-size: 1em;
+}
+
+
+/* 
 .popup-login {
     position: fixed;
     top: 50%;
@@ -125,4 +147,4 @@
 .popup-info .btn-group .info-btn:nth-child(2):hover {
     background: #161515;
     border-color: #191919;
-}
+} */

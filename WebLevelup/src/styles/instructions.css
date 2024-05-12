@@ -1,0 +1,40 @@
+#instructions ol {
+    padding-left: 1.5625em; 
+}
+
+.instructions-header{
+    font-size: 2.5em; 
+    color: rgba(111, 57, 187, 0.507);
+}
+
+.instructions-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 0.0625em solid #3c3a3a;
+    padding-top: 0.5em;
+}
+
+.instructions-buttons .exit-btn {
+    width: 8.125em; 
+    height: 2.75em; 
+    background: transparent;
+    font-size: 1em;
+    letter-spacing: 0.0625em; 
+    font-weight: 600;
+}
+
+.instructions-buttons .exit-btn:hover {
+    background: rgba(111, 57, 187, 0.507);
+    box-shadow: none;
+    color: #fff;
+}
+
+.instructions-buttons .continue-btn {
+    width: 8.125em; 
+    height: 2.75em;
+    font-size: 1em;
+    letter-spacing: 0.0625em; 
+    font-weight: 600;
+    pointer-events: none;
+}

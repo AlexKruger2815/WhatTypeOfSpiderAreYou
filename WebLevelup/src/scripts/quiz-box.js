@@ -3,46 +3,36 @@ let questionCount = 0;
 let questionNumber = 1;
 
 nextBtn.onclick = () => {
-    if (questionCount < questions.length - 1) {
+    nextBtn.classList.remove('active');
+
+    if (questionCount < questions.length-1) {
+
         questionCount++;
         showQuestions(questionCount);
+
         questionNumber++;
         questionNumberCounter(questionNumber);
-        nextBtn.classList.remove('active');
+
     }
     else {
-        resultBox.style.display = 'flex';
         showResultBox();
     }
 }
 
 function showQuestions(index) {
-    header.style.display = 'none';
-    resultBox.style.display = 'none';
-    const questionText = document.querySelector('.question-text');
-    questionText.textContent = `${index + 1}. ${questions[index].question}`;
 
-    const optionList = document.querySelector('.option-list');
-    Array.from(optionList.children).forEach(child => {
-        optionList.removeChild(child);
-    });
+    const questionText = document.querySelector('.question-text');
+    questionText.textContent = `${index+1}. ${questions[index].question}`;
+    let optionTag = '';
 
     questions[index].options.forEach(option => {
-        const optionDiv = document.createElement('section');
-        const optionSpan = document.createElement('span');
-
-        optionDiv.classList.add('option');
-        optionDiv.setAttribute('data-spider-id', option.spiderID);
-        optionSpan.textContent = option.option;
-        optionDiv.appendChild(optionSpan);
-        optionList.appendChild(optionDiv);
+        optionTag += `<div class="option" data-spider-id="${option.spiderID}"><span>${option.option}</span></div>`;
     });
+    optionList.innerHTML = optionTag;
 
     const option = document.querySelectorAll('.option');
     for (let i = 0; i < option.length; i++) {
-        option[i].addEventListener('click', function () {
-            optionSelected(this);
-        });
+        option[i].setAttribute('onclick', 'optionSelected(this)');
     }
     resetResultBox();
 }
@@ -66,9 +56,60 @@ function questionNumberCounter(index) {
     const questionTotal = document.querySelector('.question-total');
     questionTotal.textContent = `${index} of ${questions.length} Questions`
 }
+
+function showResultBox() {
+    quiz.style.visibility = 'hidden';
+    results.style.visibility = 'visible';
+    
+    const numbers = spiderIds.map(Number);
+    console.log('spiderIds',spiderIds);
+    const modeSpider = numbers.reduce((acc, curr) => {
+        acc[curr] = (acc[curr] || 0) + 1;
+        if (acc[curr] > acc.modeCount) {
+            acc.mode = curr;
+            acc.modeCount = acc[curr];
+        }
+        return acc;
+    }, { mode: null, modeCount: -1 }).mode;
+
+    spiderIds=[];
+    
+    console.log('mode',modeSpider);
+    fetch(`http://localhost:3000/api/spiders/${modeSpider}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(spiderData => {
+                const name = spiderData.Name;
+                const description = spiderData.Description;
+                const imageLink = spiderData.ImageLink;
+
+                const spiderImage = document.querySelector('.spider-image');
+                const resultText = document.querySelector('.result-text');
+                const spiderDescription = document.querySelector('.spider-description');
+
+                spiderImage.src = imageLink;
+                spiderImage.alt = name;
+                resultText.textContent = `You are the ${name}`;
+                spiderDescription.textContent = description;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+    results.style.visibility = 'visible';
+}
+
+function getRandomSource(sources) {
+    return sources[Math.floor(Math.random() * sources.length)];
+}
+
 function resetResultBox() {
-    const spiderImage = resultBox.querySelector('.spider-image');
-    const randomSource = "weaving-spider.gif";
+    const spiderImage = document.querySelector('.spider-image');
+    const randomSource = getRandomSource(imageSources);
     spiderImage.src = randomSource;
     spiderImage.alt = "spider gif";
     var resultText = document.querySelector('.result-text');

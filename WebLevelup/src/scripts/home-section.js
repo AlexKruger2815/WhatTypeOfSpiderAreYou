@@ -1,21 +1,18 @@
 startBtn.onclick = () => {
-    popupInfo.classList.add('active');
-    main.classList.add('active');
+    instructions.style.visibility = 'visible';
+    main.classList.add('blur');
 }
 
 exitBtn.onclick = () => {
-    popupInfo.classList.remove('active');
-    main.classList.remove('active');
+    instructions.style.visibility = 'hidden';
+    main.classList.remove('blur');
 }
 
 continueBtn.onclick = () => {
-    if(questions.length !== 0 ){
-        quizBox.style.display = "flex";
-        quizSection.classList.add('active');
-        popupInfo.classList.remove('active');
-        main.classList.remove('active');
-        quizBox.classList.add('active'); 
+    if (questions.length !== 0 ) {
+        instructions.style.visibility = 'hidden';
+        quiz.style.visibility = 'visible';
         showQuestions(0);
         questionNumberCounter(1);
     }
-  }
+}
