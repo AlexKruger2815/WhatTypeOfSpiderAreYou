@@ -1,20 +1,14 @@
-const nextBtnQuiz = document.querySelector('.next-btn');
-const header2 = document.querySelector('.header');
-
 let spiderIds = [];
 let questionCount = 0;
 let questionNumber = 1;
 
-nextBtnQuiz.onclick = () => {
-    if (questionCount < questions.length-1) {
-
+nextBtn.onclick = () => {
+    if (questionCount < questions.length - 1) {
         questionCount++;
         showQuestions(questionCount);
-
         questionNumber++;
         questionNumberCounter(questionNumber);
-
-        nextBtnQuiz.classList.remove('active');
+        nextBtn.classList.remove('active');
     }
     else {
         resultBox.style.display = 'flex';
@@ -22,22 +16,33 @@ nextBtnQuiz.onclick = () => {
     }
 }
 
-
 function showQuestions(index) {
-    header2.style.display = 'none';
+    header.style.display = 'none';
     resultBox.style.display = 'none';
     const questionText = document.querySelector('.question-text');
-    questionText.textContent = `${index+1}. ${questions[index].question}`;
-    let optionTag = '';
+    questionText.textContent = `${index + 1}. ${questions[index].question}`;
+
+    const optionList = document.querySelector('.option-list');
+    Array.from(optionList.children).forEach(child => {
+        optionList.removeChild(child);
+    });
 
     questions[index].options.forEach(option => {
-        optionTag += `<div class="option" data-spider-id="${option.spiderID}"><span>${option.option}</span></div>`;
+        const optionDiv = document.createElement('section');
+        const optionSpan = document.createElement('span');
+
+        optionDiv.classList.add('option');
+        optionDiv.setAttribute('data-spider-id', option.spiderID);
+        optionSpan.textContent = option.option;
+        optionDiv.appendChild(optionSpan);
+        optionList.appendChild(optionDiv);
     });
-    optionList.innerHTML = optionTag;
 
     const option = document.querySelectorAll('.option');
     for (let i = 0; i < option.length; i++) {
-        option[i].setAttribute('onclick', 'optionSelected(this)');
+        option[i].addEventListener('click', function () {
+            optionSelected(this);
+        });
     }
     resetResultBox();
 }
@@ -50,7 +55,7 @@ function optionSelected(answer) {
     });
     let userAnswer = answer.textContent;
     answer.classList.add('selected')
-    nextBtnQuiz.classList.add('active');
+    nextBtn.classList.add('active');
 
     const spiderID = questions[questionCount].options.find(option => option.option === userAnswer).spiderID;
 
@@ -61,7 +66,7 @@ function questionNumberCounter(index) {
     const questionTotal = document.querySelector('.question-total');
     questionTotal.textContent = `${index} of ${questions.length} Questions`
 }
-function resetResultBox(){
+function resetResultBox() {
     const spiderImage = resultBox.querySelector('.spider-image');
     const randomSource = "weaving-spider.gif";
     spiderImage.src = randomSource;
@@ -94,19 +99,19 @@ function showResultBox() {
             return response.json();
         })
         .then(spiderData => {
-                const name = spiderData.Name;
-                const description = spiderData.Description;
-                const imageLink = spiderData.ImageLink;
+            const name = spiderData.Name;
+            const description = spiderData.Description;
+            const imageLink = spiderData.ImageLink;
 
-                const resultBox = document.querySelector('.result-box');
-                const spiderImage = resultBox.querySelector('.spider-image');
-                const resultText = resultBox.querySelector('.result-text');
-                const spiderDescription = resultBox.querySelector('.spider-description');
+            const resultBox = document.querySelector('.result-box');
+            const spiderImage = resultBox.querySelector('.spider-image');
+            const resultText = resultBox.querySelector('.result-text');
+            const spiderDescription = resultBox.querySelector('.spider-description');
 
-                spiderImage.src = imageLink;
-                spiderImage.alt = name;
-                resultText.textContent = `Your Spider Type: ${name}`;
-                spiderDescription.textContent = description;
+            spiderImage.src = imageLink;
+            spiderImage.alt = name;
+            resultText.textContent = `Your Spider Type: ${name}`;
+            spiderDescription.textContent = description;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

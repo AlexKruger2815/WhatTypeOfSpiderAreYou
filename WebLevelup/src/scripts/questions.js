@@ -1,4 +1,3 @@
-const continueBtn = document.querySelector('.continue-btn');
 let questions = [];
 
 fetch('/form')
@@ -27,15 +26,3 @@ fetch('/form')
   .catch(error => {
     console.error('There was a problem with the fetch operation:', error);
   });
-
- continueBtn.onclick = () => {
-  if(questions.length !== 0 ){
-      quizBox.style.display = "flex";
-      quizSection.classList.add('active');
-      popupInfo.classList.remove('active');
-      main.classList.remove('active');
-      quizBox.classList.add('active'); 
-      showQuestions(0);
-      questionNumberCounter(1);
-  }
-}
