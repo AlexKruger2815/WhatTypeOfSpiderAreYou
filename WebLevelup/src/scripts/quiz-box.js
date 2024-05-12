@@ -36,14 +36,14 @@ nextBtn.onclick = () => {
 
     }
 
-    if (questionCount > 0 ){
-        prevBtn.style.display = 'block';
+    else {
+        prevBtn.style.display = 'none';
+        results.style.display = 'flex';
+        showResultBox();
     }
 
-    if (questionCount == questions.length-1){
-        prevBtn.style.display = 'none';
-        resultBox.style.display = 'flex';
-        showResultBox();
+    if (questionCount > 0 ){
+        prevBtn.style.display = 'block';
     }
 }
 

@@ -1,38 +1,37 @@
 #quiz {
     min-width: 70%;
 }
-
+ 
 .question-text {
-    font-size: 1.5em; 
+    font-size: 1.5em;
     text-align: center;
     color: rgba(111, 57, 187, 0.507);
 }
-
+ 
 .option-list .option {
-    padding: 0.75em; 
+    padding: 0.75em;
     background: transparent;
     border: 0.125em solid rgba(111, 57, 187, 0.507);
     border-radius: 2.25em;
     font-size: 1em;
-    margin: 0.9375em 0; 
+    margin: 0.9375em 0;
     cursor: pointer;
 }
-
+ 
 .option-list .option:hover {
     background-color: rgba(111, 57, 187, 0.507);
     border-color: rgba(111, 57, 187, 0.507);
 }
-
+ 
 .option-list .option.selected {
     background: #191919;
     color: #e6e6e6;
     border-color: #e6e6e6;
 }
-
-
+ 
 .quiz-footer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     border-top: 0.0625em solid #3c3a3a;
     padding-top: 0.5em;
@@ -42,12 +41,20 @@
 .quiz-footer .question-total {
     font-size: 1em;
     font-weight: 600;
+    padding-bottom: 0.8em;
 }
 
-.quiz-footer .next-btn {
-    background-color: transparent;
-    width: 6.25em; 
-    height: 3.125em; 
+.quiz-footer .button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+ 
+.quiz-footer .button-container .next-btn {
+    background-color: #c1c1c1;
+    color: #000;
+    width: 6.25em;
+    height: 3.125em;
     border: 0.125em solid #a8a8a8;
     outline: none;
     border-radius: 0.375em;
@@ -56,14 +63,26 @@
     cursor: pointer;
     pointer-events: none;
 }
-
-.quiz-footer .next-btn.active {
-    background-color: #a8a8a8;
+ 
+.quiz-footer .button-container .next-btn.active {
+    background-color: rgba(111, 57, 187, 0.507);
+    color: #000;
     pointer-events: auto;
 }
-
-.quiz-footer .next-btn.active:hover {
+ 
+.quiz-footer .button-container .next-btn.active:hover {
     background-color: rgba(111, 57, 187, 0.507);
+}
+ 
+.quiz-footer .button-container .prev-btn {
+    width: 6.25em;
+    height: 3.125em;
+    border: 0.125em solid #a8a8a8;
+    outline: none;
+    border-radius: 0.375em;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
 }
 /* 
 .quiz-section {
